@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="York">
+
+
+
+
+
+<title>Android 定位NDK出错代码位置 | York&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Do It</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Do It</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Android 定位NDK出错代码位置</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">York</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2019 /08 /08&nbsp;&nbsp;15:13:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Android/">Android</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>　　在Android开发中，我们经常遇到以下错误：</p>
+<pre><code>2020-04-03 16:32:15.856 15191-15191/? A/DEBUG: signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x300000040
+2020-04-03 16:32:15.856 15191-15191/? A/DEBUG:     x0  0000000000000000  x1  0000000000000000  x2  0000000000000091  x3  00000079b34ce000
+2020-04-03 16:32:15.856 15191-15191/? A/DEBUG:     x4  0000000000000018  x5  b6c0f112e6ded8b7  x6  000000792426bd00  x7  c066241c39b9f253
+</code></pre>
+<p>　　一旦出现这种报错，那么如果我们只是做应用层开发的话，基本是懵逼的，因为这种都是底层C或者C++代码出现了错误，代码不在手上，当然无能为力了。但是如果C或C++代码是我们自己写的话，那就能定位出错位置并解决了。</p>
+<p><strong>那么我们该怎么解决呢？</strong></p>
+<h1 id="1-找到出错的内存地址"><a href="#1-找到出错的内存地址" class="headerlink" title="1.找到出错的内存地址"></a>1.找到出错的内存地址</h1><p>　　我们查看Log,找到如下报错日志：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93d3cueW9ya3l1ZS5jb20vcGljcy9jdXJfbmRrX2J1Z19zYWx2ZV9hZGRyZXNzLnBuZw?x-oss-process=image/format,png#pic_center" alt="在这里插入图片描述"><br>&amp;emsp;&amp;emsp;很明显，就是我们要分析的这种情况——NDK部分的代码出错了，看Log我们可以知道，这里说的是&#x2F;lib&#x2F;arm64&#x2F;libplayer_lib.so 这个库报错了，具体的报错地址是 000000000001ed40 。</p>
+<h1 id="2-使用NDK自带的工具定位错误"><a href="#2-使用NDK自带的工具定位错误" class="headerlink" title="2.使用NDK自带的工具定位错误"></a>2.使用NDK自带的工具定位错误</h1><p>　　有了之前找到的错误地址，我们就可以用NDK自带的工具“arm-linux-androideabi-addr2line.exe”进行定位了。这里看你的库是什么架构的，我这里是&#x2F;lib&#x2F;arm64&#x2F;，显然不能用这个，而是用 aarch64-linux-android-addr2line.exe 。这个才是支持我这64架构的。</p>
+<p>　　因为好用，所以我们可以经常用它来解决同类问题。我们可以把 aarch64-linux-android-addr2line.exe 拷贝到我们的工程里来，然后<font size=5>重点来了</font>，我们要怎么用它呢？如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aarch64-linux-android-addr2line.exe -e xx.so的文件目录 错误地址 </span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aarch64-linux-android-addr2line.exe -e D:\UI\project\ffmpeg\JiayzMediaSDK\JiayzMedia\build\intermediates\cmake\debug\obj\arm64-v8a\libplayer_lib.so <span class="number">000000000001</span>ed40</span><br></pre></td></tr></table></figure>
+<p>看效果：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93d3cueW9ya3l1ZS5jb20vcGljcy9jdXRfbmRrX2Vycm9yX2ZpbmQucG5n?x-oss-process=image/format,png#pic_center" alt="在这里插入图片描述"></p>
+<p>　　好了，到这里我们就已经找到报错代码在 JiayzAudio.cpp 这个文件的375行。接下来就可以进入代码位置去分析错误了。</p>
+<p>　　<font size=6><em>是不是很6，很方便？</em></font></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/ndk/"># ndk</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/08/14/%E5%AE%89%E5%8D%93%E9%9F%B3%E8%A7%86%E9%A2%91%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%AF%87/">安卓音视频</a>
+            
+            
+            <a class="next" rel="next" href="/2019/06/30/%E5%A5%B3%E7%9B%86%E5%8F%8B%E9%97%AE%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88Https%E6%98%AF%E5%AE%89%E5%85%A8%E7%9A%84/">女盆友问：为什么Https是安全的？</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Copyright © 2019 - 2023 Designed by York</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="York">
+
+
+
+
+
+<title>Java 基础知识 | York&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Do It</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Do It</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Java 基础知识</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">York</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020 /06 /02&nbsp;&nbsp;16:22:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Android/">Android</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="集合类"><a href="#集合类" class="headerlink" title="集合类"></a>集合类</h2><p>Java中所有的集合类都位于java.util包下，主要由两个接口派生出来。分别四Collection（集合）和Map.Collection（映射集合），Set、Map、List可以看做集合的三大类。而遍历集合的工具有Iterator和Enumeration（迭代器和枚举）</p>
+<p>三大分类：</p>
+<p>List（列表）：有序的，可重复的</p>
+<p>Set（集合）：不可重复的</p>
+<p>Map（映射）：无序的，键唯一，值不唯一<br>重要的集合类</p>
+<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p>List是Collection最常用的子接口，其最大的特点是允许保存重复元素的数据，并且List接口对Collection接口方法进行扩充。</p>
+<p>&#x2F;&#x2F; List扩充的三个方法</p>
+<p>public E get(int index)  &#x2F;&#x2F;获取指定索引的数据</p>
+<p>public E set(int index,E element)  &#x2F;&#x2F;修改指定的索引数据</p>
+<p>public ListIterator<E> listIterator  &#x2F;&#x2F;返回listItertor接口</p>
+<h3 id="ArrayList（数组列表）"><a href="#ArrayList（数组列表）" class="headerlink" title="ArrayList（数组列表）"></a>ArrayList（数组列表）</h3><p>1.内部由数组维护的。</p>
+<p>插入add：当需要在某一位置index插入（add）一个对象时，实际是将数组下标为index的所有元素通过一个for循环，全部向后arraycopy一位，然后将新的元素放到index的位置。</p>
+<p>移除remove：则同理，即删除数组下标为index的数组种得元素，然后通过for循环将之后所有的对象元素向前arraycopy一位。</p>
+<p>2.优缺点：</p>
+<p>优点：物理上连续，所以查找快捷。<br>缺点：删除和增加元素慢，需大量移动数据。<br>3.如果要在数组中反复地插入删除数据，怎么优化时间复杂度？</p>
+<p>答：采用标记法，删除时不进行arraycopy，而是直接赋值，如赋null，最后再一起一个for循环将null移除。</p>
+<h3 id="LinkedList（链表）"><a href="#LinkedList（链表）" class="headerlink" title="LinkedList（链表）"></a>LinkedList（链表）</h3><p>1.内部是一个Node<E>双向链表。</p>
+<p>一个节点，他除了有它自己的数据之外，他还会有2个节点，一个指向他的上一个节点，一个指向它的下一个节点。</p>
+<p>private static class Node<E>{<br>    E item; &#x2F;&#x2F;一个节点，他自己的数据<br>    Node<E> next;<br>    Node<E>prev;<br>}<br>插入add：当需要在某一位置index插入（add）一个对象时，只需要将index手上一个节点的next指向要插入新数据的pre，而新数据的next指向下一个节点的pre，只需要经过2次赋值即可。</p>
+<p>删除remove：同理，既只要讲要删除的数据的上一个节点的next指向要删除的节点后一个节点的pre即可。</p>
+<p>2.优缺点：</p>
+<p>优点：插入删除更快<br>缺点：物理上不连续，查找需要轮询</p>
+<h2 id="set（集合）"><a href="#set（集合）" class="headerlink" title="set（集合）"></a>set（集合）</h2><p>无序(无下标)，不重复的，当使用（jdk1.9才有这个方法，1.8没有）of() 这个新方法的时候如何发现集合中存在重复的元素则会直接抛出异常，Set集合的常规使用形式一定是依靠子类进行实例化的，Set接口中有两个常用的子类：HashSet、TreeSet。</p>
+<h3 id="HashSet（散列存放）"><a href="#HashSet（散列存放）" class="headerlink" title="HashSet（散列存放）"></a>HashSet（散列存放）</h3><p>1.概念：<br>HashSet是Set接口较为常见的子类，所有的内容都采用散列（无序）的方式进行存储。该子类的最大特点就是不允许保存重复元素。HashSet会识别重复的元素，HashSet可以实现去重操作。</p>
+<p>2.HashSet如何实现去重？</p>
+<p>利用的是Object类中提供的方法实现的。</p>
+<p>public int hashCode(); &#x2F;&#x2F; 对象编码<br>public boolean equals(Object obj); &#x2F;&#x2F; 对象比较<br>首先利用hashCode()进行编码匹配，如果编码不存在则表示数据不存在，证明没有重复的对象需要比较，如果发现重复了，则该数据是不能被保存。</p>
+<h3 id="TreeSet（有序存放）"><a href="#TreeSet（有序存放）" class="headerlink" title="TreeSet（有序存放）"></a>TreeSet（有序存放）</h3><p>1.概念</p>
+<p>TreeSet(内部实现二叉树) 特点：有序、不重复 。主要作用：排序。</p>
+<p>所有保存的数据都会按照从小到大的顺序（字符串会按照字母大小的顺序依次比较）排列，并且元素不重复。</p>
+<p>在Java程序之中，判断重复元素的判断处理就是hashCode()与equals()两个方法共同完成。</p>
+<h2 id="Map（映射）"><a href="#Map（映射）" class="headerlink" title="Map（映射）"></a>Map（映射）</h2><p>Map用于保存具有映射关系的数据：Key - Value</p>
+<p>对于Set，底层其实依然是一个Map，但是Set选择不使用Value，也就是Set的Value值始终是一个常量。</p>
+<h3 id="HashMap-lt-key-value-gt"><a href="#HashMap-lt-key-value-gt" class="headerlink" title="HashMap &lt;key, value&gt;"></a>HashMap &lt;key, value&gt;</h3><p>1.结构</p>
+<p>java8前：数组+链表的一种结构</p>
+<p>java8后：数组+链表+红黑树的结构，当链表长度超过8的时候，改用红黑树进行存储，即利用红黑树快速增删改查的特点提高HashMap的性能。</p>
+<p>2.原理</p>
+<p>put原理：key（是对象，所以就有hashcode）-&gt;用hashcode-&gt;hashcode&amp;（length -1）相当于求模运算-&gt;快速找到数组下标int-&gt;在数组下标为index的元素中存入链表-&gt;链表的节点存入数据value：数据。</p>
+<p>get原理：通过key的hashcode-&gt;用hashcode-&gt;hashcode&amp;（length -1）快速找到数组下标-&gt;在链表中轮训通过比对key查找到数据然后返回。</p>
+<h3 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h3><p>1.概念</p>
+<p>因为HashMap在多线程开发中存在线程不安全的问题，因为可能在同一个链表上同时出现put和remote操作。于是出现了HashTable。</p>
+<p>HashTable 默认的初始大小为 11，之后每次扩充，容量变为原来的 2n+1。HashMap 默认的初始化大小为 16。之后每次扩充，容量变为原来的 2 倍。</p>
+<p>HashTable因为对put、remove等每一个函数都加了内置锁synchronized，锁的是函数，所以效率低。但保证了线程安全。</p>
+<h3 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h3><p>1.概念</p>
+<p>LinkedHashMap继承自HashMap，它的多种操作都是建立在HashMap操作的基础上的。同HashMap不同的是，LinkedHashMap维护了一个Entry的双向链表，保证了插入的Entry中的顺序。这也是Linked的含义。其实就是：LinkedHashMap&#x3D;HashMap+双向链表。</p>
+<p>public class LinkedHashMap&lt;K,V&gt; extends HashMap&lt;K,V&gt; implements Map&lt;K,V&gt;<br>2.维护链表主要使用三个方法</p>
+<p>afterNodeRemoval：在节点remove操作后进行调用。<br>afterNodeInsertion：在节点被访问后根据accessOrder判断是否需要调整链表顺序。<br>afterNodeAccess：这是一个很奇葩的方法，虽然名字是在插入之后进行的维护链表的操作，但是默认实际上这个什么都没做。<br>3.使用场景</p>
+<p>顺序遍历和快速定位：LinkedHashMap适合有加入顺序和快速定位的场景。我自己开发中遇到过一个场景，就是把配置顺序读取，需要按照读取的顺序访问，而且还需要根据值key直接获取值。这个场景就需要使用LinkedHashMap。<br>缓存：LinkedHashMap另外一个强大的功能就是做缓存。不过我们要继承一下。去重写一个方法removeEldestEntry。这个方法在插入之后会被调用到。LinkedHashMap支持两种缓存策略。FIFO和LRU。大家应该也猜到控制策略的地方就是accessOrder。默认为false。就是FIFO。设置为true时就是LRU。因为在访问的时候会调整链表结构，调用afterNodeAccess会把访问的节点放入队列最后。所以每次删除first就可以达到效果。</p>
+<h3 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h3><p>Map接口有一个重要的实现类TreeMap，TreeMap可以实现存储元素的自动排序。在TreeMap中，键值对之间按键有序，TreeMap的实现基础是平衡二叉树。</p>
+<p>1.概念<br>TreeMap使用的存储结构是平衡二叉树，也称为红黑树。它首先是一棵二叉树，具有二叉树所有的特性，即树中的任何节点的值大于它的左子节点，且小于它的右子节点，如果是一棵左右完全均衡的二叉树，元素的查找效率将获得极大提高。最坏的情况就是一边倒，只有左子树或只有右子树，这样势必会导致二叉树的检索效率大大降低。为了维持二叉树的平衡，程序员们提出了各种实现的算法，其中平衡二叉树就是其中的一种算法。</p>
+<p>2.方法</p>
+<p>put：该方法用于添加一个Entry（结点，包括key和value）到TreeMap对象，key为与指定值将要关联的键，value为使用指定键关联的值。如果key对应的值已经存在，则将key对应的值修改为value。<br>get：该方法用于获取指定key的value，key为与value相关联的键。</p>
+<h3 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h3><p>java.util.concurrent.ConcurrentHashMap 属于 JUC 包下的一个集合类，可以实现线程安全。</p>
+<p>概念：</p>
+<p>concurrentHashMap是一个支持高并发更新与查询的哈希表(基于HashMap)。在保证安全的前提下，进行检索不需要锁定。与hashtable不同，该类不依赖于synchronization去保证线程操作的安全。<br>它由多个 Segment 组合而成。Segment 本身就相当于一个 HashMap 对象。同 HashMap 一样，Segment 包含一个 HashEntry 数组，数组中的每一个 HashEntry 既是一个键值对，也是一个链表的头节点。<br>像这样的 Segment 对象，在 ConcurrentHashMap 集合中有 2 的 N 次方个，共同保存在一个名为 segments 的数组当中。<br>put</p>
+<p>首先是通过 key 定位到 Segment，之后在对应的 Segment 中进行具体的 put。虽然 HashEntry 中的 value 是用 volatile 关键词修饰的，但是并不能保证并发的原子性，所以 put 操作时仍然需要加锁处理。<br>1.加锁操作：第一步的时候会尝试获取锁tryLock()，如果获取失败肯定就有其他线程存在竞争，则利用 scanAndLockForPut() 自旋获取锁。如果重试的次数达到了MAX_SCAN_RETRIES 则改为阻塞锁获取，保证能获取成功。<br>2.遍历该 HashEntry，如果不为空则判断传入的 key 和当前遍历的 key 是否相等，相等则覆盖旧的 value。<br>3.为空则需要新建一个 HashEntry 并加入到 Segment 中，同时会先判断是否需要扩容。<br>4.释放锁<br>get</p>
+<p>1.Key 通过 Hash 之后定位到具体的 Segment<br>2.再通过一次 Hash 定位到具体的元素上<br>3.由于 HashEntry 中的 value 属性是用 volatile 关键词修饰的，保证了内存可见性，所以每次获取时都是最新值。<br>4.ConcurrentHashMap 的 get 方法是非常高效的，因为整个过程都不需要加锁。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Java/"># Java</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/02/26/%E4%BA%BA%EF%BC%8C%E4%B8%80%E5%88%87%E7%A4%BE%E4%BC%9A%E5%85%B3%E7%B3%BB%E4%B9%8B%E6%80%BB%E5%92%8C/">人，一切社会关系之总和</a>
+            
+            
+            <a class="next" rel="next" href="/2020/03/02/Android%E5%B7%A5%E7%A8%8B%E5%8F%8AAS%E9%85%8D%E7%BD%AE/">Android 工程及AS配置</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Copyright © 2019 - 2023 Designed by York</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

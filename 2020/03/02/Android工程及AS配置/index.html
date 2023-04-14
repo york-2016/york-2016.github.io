@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="York">
+
+
+
+
+
+<title>Android 工程及AS配置 | York&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Do It</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Do It</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Android 工程及AS配置</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">York</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2020 /03 /02&nbsp;&nbsp;16:14:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Android/">Android</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="1-设置用户信息"><a href="#1-设置用户信息" class="headerlink" title="1.设置用户信息"></a>1.设置用户信息</h2><h3 id="1-1-Android-Studio修改注释模板中的-USER-变量："><a href="#1-1-Android-Studio修改注释模板中的-USER-变量：" class="headerlink" title="1.1 Android Studio修改注释模板中的${USER}变量："></a>1.1 Android Studio修改注释模板中的${USER}变量：</h3><ul>
+<li>进入 Android Studio 的安装目录，进入bin下面。</li>
+<li>找到 studio64.exe.vmoptions 和 studio.exe.vmoptions。</li>
+<li>在最后一行添加一行 -Duser.name&#x3D;xxx</li>
+<li>重启AndroidStudio。</li>
+</ul>
+<h3 id="1-2-修改默认的头部注释："><a href="#1-2-修改默认的头部注释：" class="headerlink" title="1.2 修改默认的头部注释："></a>1.2 修改默认的头部注释：</h3><ul>
+<li><p>File-&gt;Settings-&gt;Editor-&gt;File and Code Templates-&gt;Includes-&gt;File Header</p>
+</li>
+<li><p>填写模板：</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by $&#123;USER&#125; on $&#123;DATE&#125; at $&#123;TIME&#125;</span><br><span class="line"> * Describer:</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-通过快捷指令-插入头部注释："><a href="#1-3-通过快捷指令-插入头部注释：" class="headerlink" title="1.3 通过快捷指令 插入头部注释："></a>1.3 通过快捷指令 插入头部注释：</h3><ul>
+<li>File–Settings–Editor–Live Template</li>
+<li>点击右侧+，添加一个Templates Group</li>
+<li>自定义Name， 如：York</li>
+<li>选中York组，再次点击右侧+，向组中添加一个Template。</li>
+<li>在Abbreviation 填入名称，如： desc。</li>
+<li>在Description 填入描述，如：添加注释信息。</li>
+<li>此时Template 显示为：desc（添加注释信息）。</li>
+<li>添加Template text</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by $USER$ on $DATE$ at $TIME$</span><br><span class="line"> * Describer:</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其中USER、DATE等双美元符号注释的类型为自定义类型，可通过点击Edit variables 进行定义。</li>
+<li>勾选Applicable的文件类型，基本可以全选。</li>
+<li>在任意文件中，输入desc，测试是否可以生产注释信息代码片段。如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by York on 2023/4/10 at 0:40</span><br><span class="line"> * Describer:</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-AndroidStudio中使用markdown插件"><a href="#2-AndroidStudio中使用markdown插件" class="headerlink" title="2. AndroidStudio中使用markdown插件"></a>2. AndroidStudio中使用markdown插件</h2><p>Android Studio 中双击readMe.md文件，看到的是原始文件内容，不便于阅读。</p>
+<p>可通过安装markdown插件浏览md文件的内容。此插件不但支持md 文件的预览，也支持实时动态编辑，简单好用。</p>
+<ul>
+<li>在Android Studio中 File– settings–plugins  中安装markdown 插件。</li>
+<li>但一般还是不能预览。还需要配置Boot  Runtime。如下：</li>
+<li>在AndroidStudio中双击shift按钮，在弹窗中选中Actions，然后在输入框中输入Choose Boot  Runtime for the IDE，回车后在弹窗中点击下拉列表，选中一个与Android studio匹配的版本自动安装。</li>
+<li>重启AndroidStudio使插件生效。</li>
+</ul>
+<h2 id="3-设置编码风格"><a href="#3-设置编码风格" class="headerlink" title="3. 设置编码风格"></a>3. 设置编码风格</h2><p>遵守Google <a target="_blank" rel="noopener" href="https://developer.android.com/kotlin/style-guide?hl=zh-cn">Kotlin样式指南</a>，项目中接入<a target="_blank" rel="noopener" href="https://github.com/diffplug/spotless">Spotless</a>插件并配置为<a target="_blank" rel="noopener" href="https://github.com/facebook/ktfmt">ktmft google style</a></p>
+<p>请安装 <a href="https://gitee.com/link?target=https://plugins.jetbrains.com/plugin/14912-ktfmt">ktfmt IntelliJ plugin</a> 插件在启用后设置Code style为Google (internal), 确保idea快捷键格式化与插件格式化风格相同。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Android%E6%8A%80%E6%9C%AF%E6%8E%A2%E7%B4%A2/"># Android技术探索</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/06/02/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Java 基础知识</a>
+            
+            
+            <a class="next" rel="next" href="/2019/08/20/Ubuntu%20%E6%9C%8D%E5%8A%A1%E5%99%A8Tomcat%E9%85%8D%E7%BD%AE%E8%AF%81%E4%B9%A6%E5%AE%9E%E7%8E%B0Https/">Ubuntu 服务器Tomcat配置证书实现Https</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Copyright © 2019 - 2023 Designed by York</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

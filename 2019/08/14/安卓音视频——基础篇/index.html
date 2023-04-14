@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="York">
+
+
+
+
+
+<title>安卓音视频 | York&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Do It</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Do It</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">安卓音视频</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">York</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2019 /08 /14&nbsp;&nbsp;14:15:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Android/">Android</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>这是关于安卓音视频的一个系列文章。大家可以从这里随意跳跃：</p>
+<p><a href="http://york-2016.github.io/2019/08/14/%E5%AE%89%E5%8D%93%E9%9F%B3%E8%A7%86%E9%A2%91%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%AF%87/" title="安卓音视频——基础篇">《安卓音视频》</a></p>
+<p><a href="http://york-2016.github.io/2019/08/16/%E5%AE%89%E5%8D%93%E9%9F%B3%E8%A7%86%E9%A2%91%E2%80%94%E2%80%94%E9%9F%B3%E9%A2%91%E6%A8%A1%E5%9D%97/" title="安卓音视频——音频模块">《安卓音视频——音频模块》</a></p>
+<p><a href="http://york-2016.github.io/2019/08/20/%E5%AE%89%E5%8D%93%E9%9F%B3%E8%A7%86%E9%A2%91%E2%80%94%E2%80%94%E5%9B%BE%E5%83%8F%E6%A8%A1%E5%9D%97/" title="安卓音视频——编解码">《安卓音视频——编解码》</a></p>
+<blockquote>
+<p>摘要：今天开始，我将会整理一下我在音视频开发中的一些知识积累，主要会包括 基础概念、音频模块、图像模块、音视频编解码、音视频播放器、MediaSDK的封装 这些内容。</p>
+</blockquote>
+<div align="center">
+<img src="https://www.yorkyue.com/pics/pic_york_media_sdk.png">
+</img>
+</div>
+
+
+<p>本系列文章将会重点围绕上图的内容来扩展，主要包括Android 音频录制、视频录制、音视频编解码，播放器设计等。此篇文章介绍一些有关音视频的基本概念。</p>
+<h1 id="1-音频基础概念"><a href="#1-音频基础概念" class="headerlink" title="1. 音频基础概念"></a>1. 音频基础概念</h1><p><strong>① 音频量化过程</strong></p>
+<p>模拟信号 —&gt; 采样 —&gt; 量化 —&gt; 编码 —&gt; 数字信号</p>
+<p><strong>② 音频量化基本参数</strong></p>
+<ul>
+<li>采样大小：一个采样用多少bit存放 。常见的有 8bit，16bit，24bit，32位。</li>
+<li>采样率：采样的频率，速率。定义为每秒从连续信号中提取并组成离散信号的采样个数。常见的有 8kHz, 16kHz, 32kHz, 44.1kHz, 48kHz，96kHz 等。</li>
+<li>声道数：单声道， 双声道， 多声道。</li>
+</ul>
+<p><strong>③ 人类对声音的感知</strong></p>
+<p>人类的听觉范围： 20Hz ——  20 kHz<br>人类的发声范围： 85Hz ——  1100 Hz</p>
+<p><strong>④ 音频码率计算</strong></p>
+<p>码率为数据传输时单位时间传送的数据位数。单位 bps 即：位每秒。几乎所有的编码格式重视的都是如何用最低的码率达到最少的失真。</p>
+<pre><code>码率  = 采样率 x 采样大小  x 声道数 （bps）
+</code></pre>
+<p>例如： 采样率为44.KHz,  采样大小为 16bit, 双声道的PCM 编码的 WAV 文件的码率是多少？</p>
+<p>答：它的码率为 44.1K x 16 x 2 &#x3D; 1411.2 kbps</p>
+<p><strong>⑤ 声音三要素</strong></p>
+<ul>
+<li>音调： 就是音频， 男生  &lt;  女生  &lt;  儿童</li>
+<li>音量： 振动的幅度，振幅越大，音量越大</li>
+<li>音色： 与材质有很大关系， 音色本质是谐波</li>
+</ul>
+<h1 id="2-音频编码"><a href="#2-音频编码" class="headerlink" title="2.音频编码"></a>2.音频编码</h1><p><strong>① 有损和无损</strong></p>
+<p>相对自然界的信号，音频编码最多只能做到无限接近，至少目前的技术只能这样了，相对自然界的信号，任何数字音频编码方案都是有损的，因为无法完全还原。</p>
+<p>在计算机应用中，能够达到最高保真水平的就是<strong>脉冲代码调制编码</strong>，即<strong>PCM编码</strong>，因此，PCM被约定俗成为无损编码，被广泛用于素材保存及音乐制作中，但这并不意味着PCM就能够确保信号绝对的保真。</p>
+<p><strong>② 数据带宽</strong></p>
+<p>数据带宽，它和ADSL中的带宽是一个概念。将码率除以8,就可以得到这个WAV的数据带宽.<br>如：采样率为44.1KHz，采样大小为16bit，双声道的PCM编码的音频信号:</p>
+<ul>
+<li>码率为：44.1K x 16 x 2 &#x3D; 1411.2 kbps</li>
+<li>数据带宽为：1411.2&#x2F;8 &#x3D; 176.4Kb&#x2F;s</li>
+</ul>
+<p>这表示存储一秒钟采样率为44.1KHz，采样大小为16bit，双声道的PCM编码的音频信号，需要176.4KB的空间，1分钟则约为10.34M。这太大了，大部分用户是不可接受的。要降低磁盘的占用，只有2种方法，降低采样指标或者<strong>编码</strong>压缩，然而，降低指标并不可取。主要还是对音频数据进行编码，以达到压缩数据量的目的。</p>
+<p><strong>③ 音频编码类型</strong></p>
+<p>根据编码方式的不同，音频编码技术分为三种：</p>
+<ul>
+<li>波形编码：音质量高，但编码率也很高。典型的波形编码方法为PCM（Pulse Code Modulation，脉冲编码调制）被广泛运用与多媒体</li>
+<li>参数编码：编码率很低，产生的合成语音的音质不高。典型的参数编码方法为LPC（Linear Predictive Coding，线性预测编码）主要运用于军事、移动通信</li>
+<li>混合编码：使用参数编码技术和波形编码技术，编码率和音质介于两者之间</li>
+</ul>
+<p><strong>④ 编码格式</strong></p>
+<p>常见的编码格式：<br>PCM、WAV、MP3、OGG、AAC、M4A 等。</p>
+<h1 id="3-视频基本概念"><a href="#3-视频基本概念" class="headerlink" title="3.视频基本概念"></a>3.视频基本概念</h1><p><strong>① 分辨率</strong></p>
+<p>分辨率影响图像的大小，与图像大小成正比，分辨率越高，图像越大，分辨率越低，图像越小。常见的分辨率：</p>
+<ul>
+<li>720p: 1280 x 720</li>
+<li>1080p: 1920 x 1080</li>
+<li>2K: 2560 x 1440</li>
+<li>4K: 3048 x 2160</li>
+</ul>
+<p><strong>② 清晰度</strong></p>
+<ul>
+<li>在码率一定的情况下，分辨率与清晰度成反比关系：分辨率越高，图像越模糊，分辨率越低，图像越清晰。</li>
+<li>在分辨率一定的情况下，码率与清晰度成正比关系：码率越高，图像越清晰，码率越低，图像越模糊。</li>
+</ul>
+<p><strong>③ 帧率</strong></p>
+<p>帧率是指每秒显示的图片数，或者指每秒能够更新图片的次数，又称FPS。</p>
+<p>越高的帧速率可以得到更流畅逼真的画面、每秒帧数越多，所显示的动作就会越流畅。帧率也会影响体积，帧率越高，每秒显示的画面越多，体积就越大。</p>
+<p>由于人类眼睛的特殊生理结构，如果画面帧率高于16，就会认为是连贯的，此现象称之为视觉暂留。</p>
+<p>当帧数达到一定数值后，再增长的话，人眼能感知的流畅度的提升就比较有限了。一般来说30fps是可以接受的，将性能提升至60fps则可以明显提升交互感和逼真感，如果超过75fps一般就不容易察觉到有明显的流畅度提升了。如果帧率超过屏幕刷新率只会浪费图形处理能力，因为监视器不能以这么快的速度更新。</p>
+<h1 id="4-视频编码"><a href="#4-视频编码" class="headerlink" title="4.视频编码"></a>4.视频编码</h1><p><strong>①视频的格式</strong></p>
+<p>视频的格式包括两种：<strong>封装格式</strong>和<strong>编码格式</strong></p>
+<p>一张图片可以用很多种算法来显示在屏幕中，所以图片的编码方式就有了JPEG,BMP,PNG等。</p>
+<p>视频是动态图像，用什么样的方式表达1s内的若干图片，这就是简单意义上的视频编码，继而就诞生了MPEG，H.264等多种<strong>编码格式</strong>。</p>
+<p>后来有了音频，字幕，配音，就需要一个容器把他们全部放进去保存，所以就诞生了<strong>封装格式</strong></p>
+<p><strong>② 封装格式</strong></p>
+<p>所谓封装格式，是按照一定的规则来将视频轨道、音频轨道、字幕、时间戳、编码方式等零散信息组装在一起，在播放视频文件的时候一起同步进行播放，并且提供了视频索引，可以让我们在播放视频拖动进度条时，播放器可以按照这些信息来匹配解码器，同步音视频。</p>
+<p>视频文件的封装格式不影响视频的画质，影响视频画质的是视频的编码格式</p>
+<p>典型的三种视频封装格式：ts，MP4和mkv</p>
+<ul>
+<li>ts适合网络流媒体播放，体积较大，一般用于电视直播或网络直播中。</li>
+<li>MP4一般只包括一条视频轨和一条音频轨，适合大多数设备，兼容性最好。</li>
+<li>mkv可以封装多个音频轨，字幕轨，合适网络传播分享。</li>
+</ul>
+<p><strong>③ 编码格式</strong></p>
+<p>编码格式就是指通过特定的压缩技术，将某个视频格式的文件转换成另一种视频格式文件存在的方法。</p>
+<p>不同编码方法的区别主要是压缩算法的不同。视频编码的目的主要是压缩数据体积。</p>
+<p>视频中常用的编码标准有<strong>H.26X系列</strong>，<strong>MPEG系列</strong>，移动端使用最多的是MP4视频文件，主要使用H.264 AVC编码格式。</p>
+<p><strong>④ H.264 AVC编码格式</strong></p>
+<ul>
+<li><strong>低码率</strong>：和MPEG2，MPEG4等压缩技术相比，在同等图像质量下，采用H.264技术压缩后的数据量只有MPEG2的1&#x2F;8，MPEG4的1&#x2F;3。H.264的最大优势是具有很高的数据压缩率，可以有效减少用户带宽的占用。</li>
+<li><strong>高质量的图像</strong>：H。264能提供连续，流畅的高质量图像。</li>
+<li><strong>容错能力强</strong>：H.264提供了解决在不稳定网络环境下容易发生的丢包等错误的必要工具。</li>
+<li><strong>网络适应性强</strong>：H.264提供了网路抽象层，使得H.264的文件能容易地在不同网络上传输。</li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/"># 音视频</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/08/16/%E5%AE%89%E5%8D%93%E9%9F%B3%E8%A7%86%E9%A2%91%E2%80%94%E2%80%94%E9%9F%B3%E9%A2%91%E6%A8%A1%E5%9D%97/">安卓音视频——音频模块</a>
+            
+            
+            <a class="next" rel="next" href="/2019/08/08/Android-%E5%AE%9A%E4%BD%8DNDK%E5%87%BA%E9%94%99%E4%BB%A3%E7%A0%81%E4%BD%8D%E7%BD%AE/">Android 定位NDK出错代码位置</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Copyright © 2019 - 2023 Designed by York</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
