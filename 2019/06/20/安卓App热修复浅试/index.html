@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="York">
+
+
+
+
+
+<title>安卓App热修复浅试 | York&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Do It</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Do It</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">安卓App热修复浅试</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">York</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2019 /06 /20&nbsp;&nbsp;20:51:31</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Android/">Android</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <blockquote>
+<p>做安卓开发，尽管每个应用上线之前都是经过反复测试验证的，但是还是不免有漏网之bug。出现这种情况我们可以再出一个更新包，让用户下载升级，这是一种处理方法，但是这样的流量成本多了，而且用户体验相当不好，人家明明刚升级，结果没过一会儿又要升级了？所以热修复方法来了</p>
+</blockquote>
+<p>所谓热修复，就是在我们应用上线后出现小bug需要及时修复时，不用再发新的安装包，只需要发布补丁包，在客户不知不觉之间修复掉bug。</p>
+<p><strong>热修复工具，主要分为两大流派:</strong></p>
+<ul>
+<li><p>1.以阿里为代表的Native层替换方法表中的方法实现热修复［AndFix ,Sophix等］</p>
+</li>
+<li><p>2.以腾讯美团为代表的在JAVA层实现热修复[Tinker，Robust等]。</p>
+</li>
+</ul>
+<p>前者不需要重启APP，直接在虚拟机的方法区实现方法替换;后者要实现热修复必须要重启APP。下面记录一种Java层的Android热修复方法（也就是需要重启APP才能实现热修复）：</p>
+<h2 id="热修复工具类"><a href="#热修复工具类" class="headerlink" title="热修复工具类"></a>热修复工具类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.york.rexiufu.rexiufu;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.os.Environment;</span><br><span class="line"><span class="keyword">import</span> android.support.annotation.NonNull;</span><br><span class="line"><span class="keyword">import</span> com.york.rexiufu.utils.LogUtil;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Array;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> dalvik.system.DexClassLoader;</span><br><span class="line"><span class="keyword">import</span> dalvik.system.PathClassLoader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FixDexUtil</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">DEX_SUFFIX</span> <span class="operator">=</span> <span class="string">&quot;.dex&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">APK_SUFFIX</span> <span class="operator">=</span> <span class="string">&quot;.apk&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">JAR_SUFFIX</span> <span class="operator">=</span> <span class="string">&quot;.jar&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">ZIP_SUFFIX</span> <span class="operator">=</span> <span class="string">&quot;.zip&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">DEX_DIR</span> <span class="operator">=</span> <span class="string">&quot;odex&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">OPTIMIZE_DEX_DIR</span> <span class="operator">=</span> <span class="string">&quot;optimize_dex&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> HashSet&lt;File&gt; loadedDex = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        loadedDex.clear();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 加载补丁，使用默认目录：data/data/包名/files/odex</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> context</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">loadFixedDex</span><span class="params">(Context context)</span> &#123;</span><br><span class="line">        loadFixedDex(context, <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 加载补丁</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> context       上下文</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> patchFilesDir 补丁所在目录</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">loadFixedDex</span><span class="params">(Context context, File patchFilesDir)</span> &#123;</span><br><span class="line">        <span class="comment">// dex合并之前的dex</span></span><br><span class="line">        LogUtil.e(<span class="string">&quot;开始修复。。。。。。&quot;</span>);</span><br><span class="line">        doDexInject(context, loadedDex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *验证是否需要热修复</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isGoingToFix</span><span class="params">(<span class="meta">@NonNull</span> Context context)</span> &#123;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">canFix</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="type">File</span> <span class="variable">externalStorageDirectory</span> <span class="operator">=</span> Environment.getExternalStorageDirectory();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历所有的修复dex , 因为可能是多个dex修复包</span></span><br><span class="line">        <span class="type">File</span> <span class="variable">fileDir</span> <span class="operator">=</span> externalStorageDirectory != <span class="literal">null</span> ?</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">File</span>(externalStorageDirectory, <span class="string">&quot;YorkFix&quot;</span>) :</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">File</span>(context.getFilesDir(), DEX_DIR);<span class="comment">// data/data/包名/files/odex（这个可以任意位置）</span></span><br><span class="line"></span><br><span class="line">        File[] listFiles = fileDir.listFiles();</span><br><span class="line">        <span class="keyword">if</span> (listFiles != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (File file : listFiles) &#123;</span><br><span class="line">                <span class="keyword">if</span> (file.getName().startsWith(<span class="string">&quot;my&quot;</span>) &amp;&amp;</span><br><span class="line">                        (file.getName().endsWith(DEX_SUFFIX)</span><br><span class="line">                                || file.getName().endsWith(APK_SUFFIX)</span><br><span class="line">                                || file.getName().endsWith(JAR_SUFFIX)</span><br><span class="line">                                || file.getName().endsWith(ZIP_SUFFIX))) &#123;</span><br><span class="line"></span><br><span class="line">                    loadedDex.add(file);<span class="comment">// 存入集合</span></span><br><span class="line">                    <span class="comment">//有目标dex文件, 需要修复</span></span><br><span class="line">                    canFix = <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> canFix;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">doDexInject</span><span class="params">(Context appContext, HashSet&lt;File&gt; loadedDex)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">optimizeDir</span> <span class="operator">=</span> appContext.getFilesDir().getAbsolutePath() +</span><br><span class="line">                File.separator + OPTIMIZE_DEX_DIR;</span><br><span class="line">        <span class="comment">// data/data/包名/files/optimize_dex（这个必须是自己程序下的目录）</span></span><br><span class="line"></span><br><span class="line">        <span class="type">File</span> <span class="variable">fopt</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(optimizeDir);</span><br><span class="line">        <span class="keyword">if</span> (!fopt.exists()) &#123;</span><br><span class="line">            fopt.mkdirs();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 1.加载应用程序dex的Loader</span></span><br><span class="line">            <span class="type">PathClassLoader</span> <span class="variable">pathLoader</span> <span class="operator">=</span> (PathClassLoader) appContext.getClassLoader();</span><br><span class="line">            <span class="keyword">for</span> (File dex : loadedDex) &#123;</span><br><span class="line">                <span class="comment">// 2.加载指定的修复的dex文件的Loader</span></span><br><span class="line">                <span class="type">DexClassLoader</span> <span class="variable">dexLoader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DexClassLoader</span>(</span><br><span class="line">                        dex.getAbsolutePath(),<span class="comment">// 修复好的dex（补丁）所在目录</span></span><br><span class="line">                        fopt.getAbsolutePath(),<span class="comment">// 存放dex的解压目录（用于jar、zip、apk格式的补丁）</span></span><br><span class="line">                        <span class="literal">null</span>,<span class="comment">// 加载dex时需要的库</span></span><br><span class="line">                        pathLoader<span class="comment">// 父类加载器</span></span><br><span class="line">                );</span><br><span class="line">                <span class="comment">// 3.开始合并</span></span><br><span class="line">                <span class="comment">// 合并的目标是Element[],重新赋值它的值即可</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">/**</span></span><br><span class="line"><span class="comment">                 * BaseDexClassLoader中有 变量: DexPathList pathList</span></span><br><span class="line"><span class="comment">                 * DexPathList中有 变量 Element[] dexElements</span></span><br><span class="line"><span class="comment">                 * 依次反射即可</span></span><br><span class="line"><span class="comment">                 */</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//3.1 准备好pathList的引用</span></span><br><span class="line">                <span class="type">Object</span> <span class="variable">dexPathList</span> <span class="operator">=</span> getPathList(dexLoader);</span><br><span class="line">                <span class="type">Object</span> <span class="variable">pathPathList</span> <span class="operator">=</span> getPathList(pathLoader);</span><br><span class="line">                <span class="comment">//3.2 从pathList中反射出element集合</span></span><br><span class="line">                <span class="type">Object</span> <span class="variable">leftDexElements</span> <span class="operator">=</span> getDexElements(dexPathList);</span><br><span class="line">                <span class="type">Object</span> <span class="variable">rightDexElements</span> <span class="operator">=</span> getDexElements(pathPathList);</span><br><span class="line">                <span class="comment">//3.3 合并两个dex数组</span></span><br><span class="line">                <span class="type">Object</span> <span class="variable">dexElements</span> <span class="operator">=</span> combineArray(leftDexElements, rightDexElements);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 重写给PathList里面的Element[] dexElements;赋值</span></span><br><span class="line">                <span class="type">Object</span> <span class="variable">pathList</span> <span class="operator">=</span> getPathList(pathLoader);<span class="comment">// 一定要重新获取，不要用pathPathList，会报错</span></span><br><span class="line">                setField(pathList, pathList.getClass(), <span class="string">&quot;dexElements&quot;</span>, dexElements);</span><br><span class="line">            &#125;</span><br><span class="line">            LogUtil.e(<span class="string">&quot;修复完成&quot;</span>);<span class="comment">//此处可以把所有的dex文件都删除掉</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 反射给对象中的属性重新赋值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">setField</span><span class="params">(Object obj, Class&lt;?&gt; cl, String field, Object value)</span> <span class="keyword">throws</span> NoSuchFieldException, IllegalAccessException &#123;</span><br><span class="line">        <span class="type">Field</span> <span class="variable">declaredField</span> <span class="operator">=</span> cl.getDeclaredField(field);</span><br><span class="line">        declaredField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        declaredField.set(obj, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 反射得到对象中的属性值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object <span class="title function_">getField</span><span class="params">(Object obj, Class&lt;?&gt; cl, String field)</span> <span class="keyword">throws</span> NoSuchFieldException, IllegalAccessException &#123;</span><br><span class="line">        <span class="type">Field</span> <span class="variable">localField</span> <span class="operator">=</span> cl.getDeclaredField(field);</span><br><span class="line">        localField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">return</span> localField.get(obj);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 反射得到类加载器中的pathList对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object <span class="title function_">getPathList</span><span class="params">(Object baseDexClassLoader)</span> <span class="keyword">throws</span> ClassNotFoundException, NoSuchFieldException, IllegalAccessException &#123;</span><br><span class="line">        <span class="keyword">return</span> getField(baseDexClassLoader, Class.forName(<span class="string">&quot;dalvik.system.BaseDexClassLoader&quot;</span>), <span class="string">&quot;pathList&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 反射得到pathList中的dexElements</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object <span class="title function_">getDexElements</span><span class="params">(Object pathList)</span> <span class="keyword">throws</span> NoSuchFieldException, IllegalAccessException &#123;</span><br><span class="line">        <span class="keyword">return</span> getField(pathList, pathList.getClass(), <span class="string">&quot;dexElements&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 数组合并</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object <span class="title function_">combineArray</span><span class="params">(Object arrayLhs, Object arrayRhs)</span> &#123;</span><br><span class="line">        Class&lt;?&gt; clazz = arrayLhs.getClass().getComponentType();</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> Array.getLength(arrayLhs);<span class="comment">// 得到左数组长度（补丁数组）</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> Array.getLength(arrayRhs);<span class="comment">// 得到原dex数组长度</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> i + j;<span class="comment">// 得到总数组长度（补丁数组+原dex数组）</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> Array.newInstance(clazz, k);<span class="comment">// 创建一个类型为clazz，长度为k的新数组</span></span><br><span class="line">        System.arraycopy(arrayLhs, <span class="number">0</span>, result, <span class="number">0</span>, i);</span><br><span class="line">        System.arraycopy(arrayRhs, <span class="number">0</span>, result, i, j);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>YorkFix是手机上我们存放.dex文件的目录。</p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p><strong>1.先创建一个测试类，写入测试代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.york.rexiufu.rexiufu;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.widget.Toast;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BugClass</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BugClass</span><span class="params">(Context context)</span>&#123;</span><br><span class="line">        Toast.makeText(context,<span class="string">&quot;假装这里有bug！&quot;</span>,Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>2.在MianActivity进行测试</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.york.rexiufu.activitys;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.support.v7.app.AppCompatActivity;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.york.rexiufu.R;</span><br><span class="line"><span class="keyword">import</span> com.york.rexiufu.rexiufu.BugClass;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MainActivity</span> <span class="keyword">extends</span> <span class="title class_">AppCompatActivity</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">check</span><span class="params">(View view)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">BugClass</span>(MainActivity.<span class="built_in">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>3.运行APP</strong></p>
+<p><strong>4.开始修复，修改测试类BugClass</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.york.rexiufu.rexiufu;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.widget.Toast;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BugClass</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BugClass</span><span class="params">(Context context)</span>&#123;</span><br><span class="line">        Toast.makeText(context,<span class="string">&quot;bug 已经修复了！&quot;</span>,Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>5.新增一个 WelcomeActivity，在WelcomeActivity中进行热修复</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.york.rexiufu.activitys;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.Manifest;</span><br><span class="line"><span class="keyword">import</span> android.app.Activity;</span><br><span class="line"><span class="keyword">import</span> android.content.Intent;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.os.Environment;</span><br><span class="line"><span class="keyword">import</span> android.os.Handler;</span><br><span class="line"><span class="keyword">import</span> android.widget.Toast;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.york.rexiufu.R;</span><br><span class="line"><span class="keyword">import</span> com.york.rexiufu.rexiufu.FixDexUtil;</span><br><span class="line"><span class="keyword">import</span> com.york.rexiufu.utils.PermissionUtil;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WelcomeActivity</span> <span class="keyword">extends</span> <span class="title class_">Activity</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String[] permissions = &#123;Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE&#125;;</span><br><span class="line">    <span class="keyword">private</span> PermissionUtil.<span class="type">IPermissionsResult</span> <span class="variable">mIPermissionsResult</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PermissionUtil</span>.IPermissionsResult() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">passPermissons</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">forbitPermissons</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onRequestPermissionsResult</span><span class="params">(<span class="type">int</span> requestCode,  String[] permissions, <span class="type">int</span>[] grantResults)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onRequestPermissionsResult(requestCode, permissions, grantResults);</span><br><span class="line">        PermissionUtil.getInstance().onRequestPermissionsResult(<span class="built_in">this</span>, requestCode, permissions, grantResults);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_welcome);</span><br><span class="line">        PermissionUtil.getInstance().chekPermissions(<span class="built_in">this</span>, permissions, mIPermissionsResult);</span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">File</span> <span class="variable">externalStorageDirectory</span> <span class="operator">=</span> Environment.getExternalStorageDirectory();</span><br><span class="line">        <span class="comment">// 遍历所有的修复dex , 因为可能是多个dex修复包</span></span><br><span class="line">        <span class="type">File</span> <span class="variable">fileDir</span> <span class="operator">=</span> externalStorageDirectory != <span class="literal">null</span> ? <span class="keyword">new</span> <span class="title class_">File</span>(externalStorageDirectory,<span class="string">&quot;YorkFix&quot;</span>): <span class="keyword">new</span> <span class="title class_">File</span>(getFilesDir(), FixDexUtil.DEX_DIR);<span class="comment">// data/user/0/包名/files/odex（这个可以任意位置）</span></span><br><span class="line">        <span class="keyword">if</span> (!fileDir.exists())&#123;</span><br><span class="line">            fileDir.mkdirs();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (FixDexUtil.isGoingToFix(<span class="built_in">this</span>)) &#123;</span><br><span class="line">            FixDexUtil.loadFixedDex(<span class="built_in">this</span>, Environment.getExternalStorageDirectory());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Handler</span>().postDelayed(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                startActivity(<span class="keyword">new</span> <span class="title class_">Intent</span>(WelcomeActivity.<span class="built_in">this</span>, MainActivity.class));</span><br><span class="line">                finish();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>6.在AS中找到生成的 BugClass.class 。拷贝它的目录</strong></p>
+<p>D:\york_android\RexiufuDemo\app\build\intermediates\javac\debug\compileDebugJavaWithJavac\classes<br>\com\york\rexiufu\rexiufu\BugClass.class</p>
+<p>这里可以把从 com 整个包拷贝出来。</p>
+<p><strong>7.使用命令，用SDK中 build tool 里的dx工具，生成 .dex 后缀的修复包。</strong></p>
+<p>命令如下：</p>
+<p><font color="red">dx –dex –output&#x3D;[要生成的.dex文件名称].dex [刚才拷贝的修复bug的类及包名的目录]</font></p>
+<p>演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dx --dex --output=my.dex com\york\rexiufu\rexiufu\BugClass.class</span><br></pre></td></tr></table></figure>
+
+<p>这样就会的到一个 my.dex 文件</p>
+<p><strong>8.拷贝.dex文件到手机目录</strong></p>
+<p><strong>9.重新启动APP</strong></p>
+<p>这时就可以看到原来的类被替换修复了,<font size=5>修复成功！</font>。</p>
+<p><strong>补充</strong>：  在实际操作中，我们需要用网络把我们的补丁文件.dex下载到用户手机的指定文件夹中，用户在不知不觉中APP就完成了对bug的修复。所以关键我们还是要早发现bug，解决bug，这样才能给到用户有更好的体验。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Android%E6%8A%80%E6%9C%AF%E6%8E%A2%E7%B4%A2/"># Android技术探索</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/06/26/%E7%9C%8B%EF%BC%8C%E8%BF%99%E6%A0%B7%E5%B0%B1%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AE%E8%B0%B7%E6%AD%8C%E4%BA%86/">看，这样就可以访问谷歌了</a>
+            
+            
+            <a class="next" rel="next" href="/2019/06/13/Git%E7%9A%84%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E6%94%B6%E9%9B%86/">Git的常用指令收集</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Copyright © 2019 - 2023 Designed by York</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

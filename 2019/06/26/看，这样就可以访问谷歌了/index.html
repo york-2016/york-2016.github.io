@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="York">
+
+
+
+
+
+<title>看，这样就可以访问谷歌了 | York&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Do It</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Do It</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">看，这样就可以访问谷歌了</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">York</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2019 /06 /26&nbsp;&nbsp;22:12:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Sharing/">Sharing</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>很多时候我们需要访问一些国外的网站查一些资料, 但是国内的网络又访问不了,怎么办？好捉急！</p>
+<p><font size=5>来来来！</font>往这里看。</p>
+<h1 id="1-预备条件"><a href="#1-预备条件" class="headerlink" title="1.预备条件"></a>1.预备条件</h1><p>先下载安装一个<font size=4>谷歌chrome</font>浏览器，没有安装过的可以点击 <a target="_blank" rel="noopener" href="https://www.google.cn/chrome/">这里</a>下载安装。 这里安利一下，不是说国内的浏览器不好用，而是感觉Google Chrome相对其它浏览器比较简洁、方便，没什么花花绿绿的广告，也没有那么多奇形怪状的弹窗，讲老实话——的确蛮好用。</p>
+<h1 id="2-设置Chrome-可访问Google"><a href="#2-设置Chrome-可访问Google" class="headerlink" title="2.设置Chrome 可访问Google"></a>2.设置Chrome 可访问Google</h1><h3 id="2-1-在Google-Chrome中添加扩展程序"><a href="#2-1-在Google-Chrome中添加扩展程序" class="headerlink" title="2.1 在Google Chrome中添加扩展程序"></a>2.1 在Google Chrome中添加扩展程序</h3><h4 id="2-1-2-下载插件-谷歌服务助手-Ghelper"><a href="#2-1-2-下载插件-谷歌服务助手-Ghelper" class="headerlink" title="2.1.2 下载插件 谷歌服务助手 - Ghelper"></a>2.1.2 下载插件 <em>谷歌服务助手 - Ghelper</em></h4><p>下载地址：<a target="_blank" rel="noopener" href="http://googlehelper.net/" title="http://googlehelper.net/">http://googlehelper.net/</a></p>
+<p>下载好了解压得到crx文件。</p>
+<h4 id="2-1-2-添加到Google-Chrome的扩展程序"><a href="#2-1-2-添加到Google-Chrome的扩展程序" class="headerlink" title="2.1.2 添加到Google Chrome的扩展程序"></a>2.1.2 添加到Google Chrome的扩展程序</h4><p>打开谷歌浏览器右上角的菜单-更多工具-扩展程序, 将crx文件拖入谷歌浏览器中。</p>
+<h4 id="2-2-开启-谷歌服务助手-Ghelper"><a href="#2-2-开启-谷歌服务助手-Ghelper" class="headerlink" title="2.2 开启 谷歌服务助手 - Ghelper"></a>2.2 开启 <em>谷歌服务助手 - Ghelper</em></h4><p>开启了上网助手，但是这个时候还是不能访问Google的。还有最后一步，登录Ghelper助手，这里需要注册哦，看：</p>
+<p>————<font size=5>成功了！有木有？</font></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%AA%9A%E6%93%8D%E4%BD%9C/"># 骚操作</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/06/30/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4Https%E6%98%AF%E5%AE%89%E5%85%A8%E7%9A%84/">跟女友讲：为什么说Https是安全的？</a>
+            
+            
+            <a class="next" rel="next" href="/2019/06/20/%E5%AE%89%E5%8D%93App%E7%83%AD%E4%BF%AE%E5%A4%8D%E6%B5%85%E8%AF%95/">安卓App热修复浅试</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Copyright © 2019 - 2023 Designed by York</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

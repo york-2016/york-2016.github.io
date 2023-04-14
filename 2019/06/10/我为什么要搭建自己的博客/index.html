@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="York">
+
+
+
+
+
+<title>我为什么要搭建自己的博客？ | York&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Do It</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Do It</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">我为什么要搭建自己的博客？</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">York</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2019 /06 /10&nbsp;&nbsp;23:29:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Hole/">Hole</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <blockquote>
+<p>今日，我在这里写下了我的第一篇文章，这意味着我的博客搭建工作已有了雏形。往后，我希望它能在我的维护下建设的更好。</p>
+</blockquote>
+<p>故事得从我的第一个博主打赏开始，之前项目中遇到了不明所以的难题，我折腾了太久，就是没能解决它，查询了n多的资料，全是问问题的，就是没个正常、正确的答主，绝望了，于是只能把问题晾着先搞其他的，相信这也是大多数人的经历。偶然的机会，我在一篇不是很相关的博客里，看到了博主大写的 注意：，那不正是我之前遇到的难题吗，按照博主的思路，我之前的问题果然迎刃而解，那一刻，我觉得这个让我踩了一脚的肩膀简直是太了不起了。于是，第一个支付宝打赏搞起来，10块钱。哈哈，那时的我明白了，一个毫不起眼的技术、思想分享，给毫不相识的人带来的帮助，可能就是这么 不 可 估 量。我我我，我~也要做这件事。怎么做？先搞个博客呗，这不是自己懂点这个么？代码敲起来呀！</p>
+<p>就这样，随着我的网站搭建工作持续下去，搭建一个完整网站的欲望越发强烈了，强烈到只要一有时间就开始敲代码，每天晚上能敲到深夜两三点，周末更是通宵达旦地敲代码，废寝忘食，真达到了忘我境界。熬夜的这段时间，我不断在改需求，不断的扩展功能，优化网站布局，甚至频繁冒出要打造成含金量24k、知名度卓越、商用水准网站的念头，或许，这就是传说中的“我飘了”吧。</p>
+<p>我是一个由嵌入式”转”安卓开发的，现在的工作还是安卓开发。由嵌入式“转向”安卓开发的过程有悲有喜，不过现在看来，总归还是好的，这样的过程让我扩展了许多知识，从编程语言到技术积累，从基础知识到多个项目交付，我解决了很多的难题，学到了很多的东西，也让我更加相信自己，我也有了更多的思想想与人交流、分享。</p>
+<p>不可否认，每一个开发者走到现在都趟过了无数的坑，每填一个坑，就仿佛”挽救了一条鲜活的生命”，程序员每分享一个解决难题的策略，或许都能给这个世界的另一个程序员带来一份温暖。这里，我小声呼吁大家都来做这件事。
+ </p>
+<p>还有，明明有那么多的平台都可以写博客分享，我为什么要自己搭建一个网站来做这件事情呢？我个人的观点：</p>
+<ol>
+<li>自己的网站，自由度很大！</li>
+<li>自己开发，能激发学习热情！</li>
+<li>更容易打理、优化、推广</li>
+<li>会像对待自己的孩子一样对待网站，呵护它的“成长”</li>
+<li>刚好自己会一点开发</li>
+<li>尽可能的减少对平台的依赖，因为游戏规则由它定制</li>
+</ol>
+<p>  <br>说到这里，分享我之前看到的一句话（因为没想过要把它写在自己的文章里，所以没记下博主的名字）：“平台始终是资本的游戏，它的规则随时在变化着，作为普通玩家，要记得是你在玩游戏，不要让游戏玩你！” 说这话的博主见证了许多平台的兴起与落幕，也是有感而发。平台的确有着方便专业的好处，但也有许多看似合理却又不合理的约束，有好有坏，我们更怕的是它们存在着的不稳定因素，害怕隐私得不到想要的保证，还有封号、下线的危险。我不反对第三方平台，我要表达的是：我们要恰当使用第三方平台，注意我们的数据安全。</p>
+<p>最后，说一下，我会在这儿分享我的知识、思想、所见所闻……我希望它能帮助到别人。同时，这能使我快乐，它将丰富我的生活。</p>
+<p>哈哈，有没有很积极向上？</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8D%9A%E5%AE%A2/"># 博客</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/06/13/Git%E7%9A%84%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E6%94%B6%E9%9B%86/">Git的常用指令收集</a>
+            
+            
+            <a class="next" rel="next" href="/2019/04/11/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/">Hexo搭建个人博客网站</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Copyright © 2019 - 2023 Designed by York</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
