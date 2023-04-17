@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="York">
+
+
+
+
+
+<title>如何用Gitee或Github托管工程代码 | York&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Do It</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Do It</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">如何用Gitee或Github托管工程代码</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">York</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2019 /09 /15&nbsp;&nbsp;16:21:32</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Sharing/">Sharing</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <blockquote>
+<p>代码需多人或多设备联合开发时，需要一套好用的代码管理工具，搭配远程代码托管<br>对代码进行维护、管理。git是目前使用最多的代码管理工具，推荐使用。<br>免费的远程代码托管有gitee、github等。如果需要网络稳定的个人建议使用gitee。<br>本文将从工程代码的创建、版本管理、远程托管等三方面进行讲解。</p>
+</blockquote>
+<p>本文的前置条件：</p>
+<ol>
+<li>安卓了git文件</li>
+<li>已有了gitee或github 账号</li>
+<li>具有一定的编码能力</li>
+</ol>
+<h2 id="1-初始化本地git仓库"><a href="#1-初始化本地git仓库" class="headerlink" title="1. 初始化本地git仓库"></a>1. 初始化本地git仓库</h2><ul>
+<li>打开终端，在个人电脑合适的目录位置创建demo工程（文件夹），进到demo文件夹，创建一个README.md</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//创建文件夹demo</span><br><span class="line">mkdir demo</span><br><span class="line">//进入demo文件夹</span><br><span class="line">cd demo</span><br><span class="line">//创建一个readMe.md文件</span><br><span class="line">touch README.md</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>初始化git，并进行首次提交代码到本地。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//在demo文件夹中 初始化git</span><br><span class="line">git init</span><br><span class="line">//把demo下所有文件添加到git暂存区</span><br><span class="line">git add .</span><br><span class="line">//提交暂存区到仓库</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-配置gitee或github的ssh以方便本地电脑访问"><a href="#2-配置gitee或github的ssh以方便本地电脑访问" class="headerlink" title="2. 配置gitee或github的ssh以方便本地电脑访问"></a>2. 配置gitee或github的ssh以方便本地电脑访问</h2><p>使用SSH公钥可以让你在你的电脑和 gitee或github 通讯的时候使用安全连接 （Git的Remote要使用SSH地址）。</p>
+<p>配置主要分三个步骤：</p>
+<ol>
+<li>使用秘钥生成工具生成rsa秘钥和公钥</li>
+<li>将rsa公钥添加到代码托管平台</li>
+<li>将rsa秘钥添加到ssh-agent中，为ssh client指定使用的秘钥文件</li>
+</ol>
+<h3 id="2-1-在个人电脑上生成SSH密钥"><a href="#2-1-在个人电脑上生成SSH密钥" class="headerlink" title="2.1 在个人电脑上生成SSH密钥"></a>2.1 在个人电脑上生成SSH密钥</h3><p><strong>1.检查本地主机是否已经存在ssh key:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
+
+<p>看是否存在 id_rsa 和 id_rsa.pub文件，如果存在，说明已经有SSH Key。如下则说明存在。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id_rsa  id_rsa.pub  known_hosts</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.如果不存在，则生成ssh-key</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;xxx@xxx.com&quot;</span><br></pre></td></tr></table></figure>
+
+<p>执行后一直按回车键即可，不用输入密码，设置了密码那每次提交到远程都需要输入密码，麻烦。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C linux_york@163.com</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/c/Users/linux/.ssh/id_rsa):</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in /c/Users/linux/.ssh/id_rsa</span><br><span class="line">Your public key has been saved in /c/Users/linux/.ssh/id_rsa.pub</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:Y5AsJkoyNnlIo4MXOTxvrej7Tv8yqTw4DUo3CrQYtPI linux_york@163.com</span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+---[RSA 3072]----+</span><br><span class="line">| +..             |</span><br><span class="line">|+.O. . .         |</span><br><span class="line">|B*+=o.+          |</span><br><span class="line">|*Booo...         |</span><br><span class="line">|=o.o .  S        |</span><br><span class="line">|ooEo.  . .       |</span><br><span class="line">|ooo+o  .         |</span><br><span class="line">|..+oo.+          |</span><br><span class="line">|  .==o.+.        |</span><br><span class="line">+----[SHA256]-----+</span><br><span class="line"></span><br><span class="line">linux@little-PC MINGW64 ~/.ssh</span><br><span class="line">//查看一下生产的文件。显示如下则说明已生成好了ssh key</span><br><span class="line">$ ls</span><br><span class="line">id_rsa  id_rsa.pub  known_hosts</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.获取ssh key公钥内容（id_rsa.pub）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">cat id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>拷贝id_rsa.pub的内容到剪贴板，等待添加到代码托管平台。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">linux@little-PC MINGW64 ~/.ssh</span><br><span class="line">$ cat id_rsa.pub</span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDijblE2o0M5M2v35nkO1SasWI08</span><br><span class="line">cuFhiIqaY+tJ42eDxoloVC2jGnJeqtl6dW4uX15lowniXNP0eU0xm4hyI+8ghKOTw</span><br><span class="line">TVkzT2We3Edj/mDivRsScTCxyrZfZdjxo4TEuK6oMY8nAHoIvSgKg4yLehSoETIYS</span><br><span class="line">TLh8xNYeNc6DvUuLv59WgB8GMsxbKSHvsU9JxrbIIAu19mykxpmL24nWDPb/TB+mB</span><br><span class="line">/e5ehoJL9B/f0E8XQ9EmkdIShuj1xDA6F2m1ZmDABVCVZzzELBz4rWZhagjzujaWu</span><br><span class="line">j5gNGqkFFm8pEBXDMGc1tvaMSoJcvqPdVx1uWSCCS/IA3rEglFx4vDiLdWj6+GuvD</span><br><span class="line">PiFgT8tXkotAeSgKqWjX4ZZOerPcp9eapKzEqmzKXbtvYUF4B2VPUuZXkiZp40JOC</span><br><span class="line">f0NBD9mXnJyfBb0VpIAsXtUlAZLXQ5rJmZ9qLBopmQ5M38QmYWz0shQydYaKUokBK</span><br><span class="line">8IEkqSSyi+BcMH3lcZf5kfTOZts7hf0= linux_york@163.com</span><br><span class="line"></span><br><span class="line">linux@little-PC MINGW64 ~/.ssh</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-配置网站的SSH密钥"><a href="#2-2-配置网站的SSH密钥" class="headerlink" title="2.2 配置网站的SSH密钥"></a>2.2 配置网站的SSH密钥</h3><p>以 gitee为例。 主要步骤：</p>
+<ul>
+<li>登录gitee，点击个人头像的下拉菜单，选择设置</li>
+<li>在设置项找到SSH公钥</li>
+<li>添加公钥，添加标题（最好区分一下电脑）、拷贝在粘贴板的ssh key内容。</li>
+</ul>
+<p>验证是否设置成功:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">linux@little-PC MINGW64 ~</span><br><span class="line">$ ssh -T git@gitee.com</span><br><span class="line">Hi yueshichang! You&#x27;ve successfully authenticated, but GITEE.COM does</span><br><span class="line">not provide shell access.</span><br><span class="line"></span><br><span class="line">linux@little-PC MINGW64 ~</span><br></pre></td></tr></table></figure>
+
+<p>设置成功后，即可不需要账号密码pull和push代码.</p>
+<h2 id="3-配置gitee远程仓库"><a href="#3-配置gitee远程仓库" class="headerlink" title="3. 配置gitee远程仓库"></a>3. 配置gitee远程仓库</h2><ul>
+<li>登录gitee，新建仓库。</li>
+<li>配置仓库名：demo</li>
+<li>配置归属&#x2F;路径：york&#x2F;demo</li>
+<li>输入以上会 自动生成仓库地址：<a target="_blank" rel="noopener" href="https://gitee.com/linux_york/demo">https://gitee.com/linux_york/demo</a></li>
+<li>配置私有或开源：如果不打算公开就选私有，后续也可以修改。</li>
+<li>点击创建。</li>
+</ul>
+<p>查看仓库列表就会多一个demo的仓库，但是无任何文件。拷贝仓库地址到剪切板：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//这里可以选择用http还是ssh，因为我们已经配置了ssh，不妨就用SSH。</span><br><span class="line"></span><br><span class="line">HTTPS:</span><br><span class="line">https://gitee.com/linux_york/knowledge.git</span><br><span class="line">SSH:</span><br><span class="line">git@gitee.com:linux_york/demo.git</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-建立本地仓库与远程gitee远程仓库连接"><a href="#4-建立本地仓库与远程gitee远程仓库连接" class="headerlink" title="4. 建立本地仓库与远程gitee远程仓库连接"></a>4. 建立本地仓库与远程gitee远程仓库连接</h2><p>在电脑上的demo工程文件夹下，输入命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@gitee.com:linux_york/demo.git</span><br></pre></td></tr></table></figure>
+
+<p>查看远程仓库情况：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br><span class="line">origin  git@gitee.com:linux_york/demo.git (fetch)</span><br><span class="line">origin  git@gitee.com:linux_york/demo.git (push)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>表明本地已经添加了与远程<a href="mailto:&#103;&#105;&#116;&#64;&#103;&#x69;&#116;&#101;&#101;&#46;&#99;&#111;&#x6d;">&#103;&#105;&#116;&#64;&#103;&#x69;&#116;&#101;&#101;&#46;&#99;&#111;&#x6d;</a>:linux_york&#x2F;demo.git的连接。</p>
+<p>如果需要修改或取消与远程的连接，可使用：git remote remove origin 命令先断开 origin 的连接。</p>
+<p>要想再建立连接就再使用 git remote add 命令添加即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//git remote add &lt;name&gt; &lt;url&gt;。 &lt;name&gt;可以是 origin、test等。&lt;url&gt;是远程路径。</span><br><span class="line"></span><br><span class="line">$ git remote add test https://gitee.com/linux_york/demo.git</span><br><span class="line"></span><br><span class="line">$ git remote -v</span><br><span class="line">origin  https://gitee.com/linux_york/demo.git (fetch)</span><br><span class="line">origin  https://gitee.com/linux_york/demo.git (push)</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-推送本地代码到远程服务"><a href="#5-推送本地代码到远程服务" class="headerlink" title="5. 推送本地代码到远程服务"></a>5. 推送本地代码到远程服务</h2><p>首先，更新remote索引，同步远程信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>推送代码到远程服务器</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin &quot;master&quot;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>从远程拉取分支</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b localBranch origin/master</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>更新本地分支，保持与服务器一致</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>删除远程分支</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete branch_name </span><br></pre></td></tr></table></figure>
+
+<p>至此，远程代码托管基本介绍完了。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"># 开发工具</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/03/02/Android%E5%B7%A5%E7%A8%8B%E5%8F%8AAS%E9%85%8D%E7%BD%AE/">Android 工程及AS配置</a>
+            
+            
+            <a class="next" rel="next" href="/2019/08/20/Ubuntu%20%E6%9C%8D%E5%8A%A1%E5%99%A8Tomcat%E9%85%8D%E7%BD%AE%E8%AF%81%E4%B9%A6%E5%AE%9E%E7%8E%B0Https/">Ubuntu 服务器Tomcat配置证书实现Https</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Copyright © 2019 - 2023 Designed by York</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

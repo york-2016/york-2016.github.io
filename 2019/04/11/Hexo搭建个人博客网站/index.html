@@ -225,47 +225,149 @@
 <ol>
 <li><p>下载nodejs</p>
 </li>
-<li><p>安装nodejs，mac和win下都是安装程序，直接安装就行了，linux下可以通过命令直接从仓库安装也可下载二进制包安装（ps：linux不同发行版本安装命令不一样，这里不再赘述）。安装完成之后可以在终端输入node -v和npm -v查看是否安装成功，这两条命令如果都输出了版本号，那么就表示安装成功了。</p>
+<li><p>安装nodejs，mac和win下都是安装程序，直接安装就行了，linux下可以通过命令直接从仓库安装也可下载二进制包安装（ps：linux不同发行版本安装命令不一样，这里不再赘述）。安装完成之后可以在终端输入node<br>-v和npm -v查看是否安装成功，这两条命令如果都输出了版本号，那么就表示安装成功了。</p>
 </li>
-<li><p>安装完成之后因为nodejs的仓库是是国外仓库的原因，所以在下载模块的时候会巨慢（当然，如果你是有过墙梯的人，就当我没说），那么就需要添加国内的仓库。<br>在终端执行：</p>
+<li><p>安装完成之后因为nodejs的仓库是是国外仓库的原因，所以在下载模块的时候会巨慢（当然，如果你是有过墙梯的人，就当我没说），那么就需要添加国内的仓库。 在终端执行：</p>
 </li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
 
 <h3 id="2-安装Hexo"><a href="#2-安装Hexo" class="headerlink" title="2.安装Hexo"></a>2.安装Hexo</h3><p>nodejs准备就绪了，那么现在就可以安装Hexo了。执行命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
 <p>如果报权限问题就使用root权限来执行命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
 
 <p>安装命令执行完成之后，在终端执行hexo -v如果输出了Hexo的相关信息则表示Hexo已经安装成功</p>
 <h3 id="3-初始化Hexo博客文件夹"><a href="#3-初始化Hexo博客文件夹" class="headerlink" title="3. 初始化Hexo博客文件夹"></a>3. 初始化Hexo博客文件夹</h3><p>找一个好位置，执行命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog // blog 为创建的目录，你可以自己定义</span><br></pre></td></tr></table></figure>
+
 <p>执行后会生成一个blog工程文件夹。进入到 blog工程文件夹。</p>
 <p>用于更新nodejs的模块，执行命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
 <p>启动hexo服务，执行命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server //或者 hexo s</span><br></pre></td></tr></table></figure>
+
 <p>输出如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
+
 <p>说明Hexo的服务已经启动成功了，你可以在你的浏览器访问<a href="http://localhost:4000就会出现你的博客（个人网站）主页了。">http://localhost:4000就会出现你的博客（个人网站）主页了。</a></p>
-<h3 id="4-配置网站"><a href="#4-配置网站" class="headerlink" title="4. 配置网站"></a>4. 配置网站</h3><p>在blog工程根文件夹下，找到_config.yml文件，这个文件是Hexo的配置文件，大体如下：</p>
+<h3 id="4-配置网站"><a href="#4-配置网站" class="headerlink" title="4. 配置网站"></a>4. 配置网站</h3><h4 id="4-1-配置基本信息"><a href="#4-1-配置基本信息" class="headerlink" title="4.1 配置基本信息"></a>4.1 配置基本信息</h4><p>在blog工程根文件夹下，找到_config.yml文件，这个文件是Hexo的配置文件，大体如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"># Hexo Configuration</span><br><span class="line">## Docs: https://hexo.io/docs/configuration.html</span><br><span class="line">## Source: https://github.com/hexojs/hexo/</span><br><span class="line"></span><br><span class="line"># Site</span><br><span class="line">title: 你的博客(个人网站)名称</span><br><span class="line">subtitle: 你的博客(个人网站)子名称</span><br><span class="line">description: &#x27;你的博客（个人网站）的描述&#x27;</span><br><span class="line">keywords: 你的博客（个人网站）的关键字</span><br><span class="line">author: 你的博客（个人网站）的作者</span><br><span class="line">language: 你的博客（个人网站）语言 en：英文 zh-CN：简体中文</span><br><span class="line">timezone: &#x27;时区（可以不用配置）&#x27;</span><br><span class="line"></span><br><span class="line"># URL</span><br><span class="line">## If your site is put in a subdirectory, set url as &#x27;http://yoursite.com/child&#x27; and root as &#x27;/child/&#x27;</span><br><span class="line">url: 你的博客（个人网站）网址</span><br><span class="line">root: /</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br><span class="line"></span><br><span class="line"># Directory</span><br><span class="line">source_dir: source</span><br><span class="line">public_dir: public</span><br><span class="line">tag_dir: tags</span><br><span class="line">archive_dir: archives</span><br><span class="line">category_dir: categories</span><br><span class="line">code_dir: downloads/code</span><br><span class="line">i18n_dir: :lang</span><br><span class="line">skip_render:</span><br><span class="line"></span><br><span class="line"># Writing</span><br><span class="line">new_post_name: :title.md # File name of new posts</span><br><span class="line">default_layout: post</span><br><span class="line">titlecase: false # Transform title into titlecase</span><br><span class="line">external_link:</span><br><span class="line">  enable: true # Open external links in new tab</span><br><span class="line">  field: site # Apply to the whole site</span><br><span class="line">  exclude: &#x27;&#x27;</span><br><span class="line">filename_case: 0</span><br><span class="line">render_drafts: false</span><br><span class="line">post_asset_folder: false</span><br><span class="line">relative_link: false</span><br><span class="line">future: true</span><br><span class="line">highlight:</span><br><span class="line">  enable: true</span><br><span class="line">  line_number: true</span><br><span class="line">  auto_detect: false</span><br><span class="line">  tab_replace: &#x27;&#x27;</span><br><span class="line">  wrap: true</span><br><span class="line">  hljs: false</span><br><span class="line"></span><br><span class="line"># Home page setting</span><br><span class="line"># path: Root path for your blogs index page. (default = &#x27;&#x27;)</span><br><span class="line"># per_page: Posts displayed per page. (0 = disable pagination)</span><br><span class="line"># order_by: Posts order. (Order by date descending by default)</span><br><span class="line">index_generator:</span><br><span class="line">  path: &#x27;&#x27;</span><br><span class="line">  per_page: 10</span><br><span class="line">  order_by: -date</span><br><span class="line"></span><br><span class="line"># Category &amp; Tag</span><br><span class="line">default_category: uncategorized</span><br><span class="line">category_map:</span><br><span class="line">tag_map:</span><br><span class="line"></span><br><span class="line"># Metadata elements</span><br><span class="line">## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta</span><br><span class="line">meta_generator: true</span><br><span class="line"></span><br><span class="line"># Date / Time format</span><br><span class="line">## Hexo uses Moment.js to parse and display date</span><br><span class="line">## You can customize the date format as defined in</span><br><span class="line">## http://momentjs.com/docs/#/displaying/format/</span><br><span class="line">date_format: YYYY-MM-DD</span><br><span class="line">time_format: HH:mm:ss</span><br><span class="line">## Use post&#x27;s date for updated date unless set in front-matter</span><br><span class="line">use_date_for_updated: false</span><br><span class="line"></span><br><span class="line"># Pagination</span><br><span class="line">## Set per_page to 0 to disable pagination</span><br><span class="line">per_page: 10</span><br><span class="line">pagination_dir: page</span><br><span class="line"></span><br><span class="line"># Include / Exclude file(s)</span><br><span class="line">## include:/exclude: options only apply to the &#x27;source/&#x27; folder</span><br><span class="line">include:</span><br><span class="line">exclude:</span><br><span class="line">ignore:</span><br><span class="line"></span><br><span class="line"># Extensions</span><br><span class="line">## Plugins: https://hexo.io/plugins/</span><br><span class="line">## Themes: https://hexo.io/themes/</span><br><span class="line">theme: landscape</span><br><span class="line"></span><br><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: &#x27;&#x27;</span><br></pre></td></tr></table></figure>
+
 <p>可以把你的博客（个人网站）的信息配置一下，其余的配置可根据自己的需求配置，不需要就默认即可。</p>
-<h3 id="5-配置网站文章管理器——安装-Hexo-Admin-插件"><a href="#5-配置网站文章管理器——安装-Hexo-Admin-插件" class="headerlink" title="5. 配置网站文章管理器——安装 Hexo-Admin 插件"></a>5. 配置网站文章管理器——安装 Hexo-Admin 插件</h3><p>hexo-admin插件可为hexo提供可视化界面，用来管理博客文章，发布博客。 </p>
+<p>配置好了， 更新一下nodejs的模块</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>再次 hexo s，启动hexo就可以看到变化了。</p>
+<h4 id="4-2-配置-好看的theme主题"><a href="#4-2-配置-好看的theme主题" class="headerlink" title="4.2 配置 好看的theme主题"></a>4.2 配置 好看的theme主题</h4><ol>
+<li>去 <a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a> 网站查看、预览，选择自己喜欢的额主题。</li>
+<li>下载主题源码。解压到：D:\york_workspace\hexo_workspace\blog\themes\</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//BlogShow为下载的 hexo theme 主题源码。</span><br><span class="line">D:\york_workspace\hexo_workspace\blog\themes\BlogShow</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>根据主题的使用规则，配置D:\york_workspace\hexo_workspace\blog\themes\BlogShow_config.yml</li>
+<li>在blog工程根文件夹下，找到_config.yml文件，修改配置将 theme: landscape 改为 theme: BlogShow</li>
+</ol>
+<p>再次 hexo s，启动hexo就可以看到主题变成了你喜欢的了。</p>
+<h3 id="5-配置网站文章管理器——安装-Hexo-Admin-插件"><a href="#5-配置网站文章管理器——安装-Hexo-Admin-插件" class="headerlink" title="5. 配置网站文章管理器——安装 Hexo-Admin 插件"></a>5. 配置网站文章管理器——安装 Hexo-Admin 插件</h3><p>hexo-admin插件可为hexo提供可视化界面，用来管理博客文章，发布博客。</p>
 <h4 id="5-1-安装"><a href="#5-1-安装" class="headerlink" title="5.1 安装"></a>5.1 安装</h4><p>博客blog工程根目录打开 git bash，执行命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-admin</span><br></pre></td></tr></table></figure>
+
 <h4 id="5-2-启动hexo服务"><a href="#5-2-启动hexo服务" class="headerlink" title="5.2 启动hexo服务"></a>5.2 启动hexo服务</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<h4 id="5-3-配置插件"><a href="#5-3-配置插件" class="headerlink" title="5.3 配置插件"></a>5.3 配置插件</h4><p>此时应能打开 <a target="_blank" rel="noopener" href="http://localhost:4000/admin">http://localhost:4000/admin</a></p>
-<p>点击settings，<br>在seetings下，点击 “setup authentication here” 链接<br>输入自定义 username、password 和 Secret<br>copy生成的“admin config section” 文本，放到博客根目录 _config.yml 配置文件中。内容示例如下：</p>
+
+<p>此时应能打开 <a target="_blank" rel="noopener" href="http://localhost:4000/admin%E3%80%82%E4%BD%86%E6%98%AF%E4%BD%9C%E4%B8%BA%E7%AE%A1%E7%90%86%E8%80%85%EF%BC%8C%E5%B9%B6%E4%B8%8D%E5%B8%8C%E6%9C%9B%E5%88%AB%E4%BA%BA%E5%8F%AF%E4%BB%A5%E8%BF%9B%E8%A1%8C%E7%BC%96%E8%BE%91%E7%AE%A1%E7%90%86%EF%BC%8C">http://localhost:4000/admin。但是作为管理者，并不希望别人可以进行编辑管理，</a><br>所以可以为admin设置访问密码。</p>
+<h4 id="5-3-配置Hexo-Admin-插件"><a href="#5-3-配置Hexo-Admin-插件" class="headerlink" title="5.3 配置Hexo-Admin 插件"></a>5.3 配置Hexo-Admin 插件</h4><p>点击settings， 在seetings下，点击 “setup authentication here” 链接 输入自定义 username、password 和 Secret<br>copy生成的“admin config section” 文本，放到博客根目录 _config.yml 配置文件中。内容示例如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># hexo-admin authentification</span><br><span class="line">admin:</span><br><span class="line">  username: username</span><br><span class="line">  password_hash: $2a$10$L.XAIqIWgTc5S1zpvV3MEu7/rH34p4Is/nq824smv8EZ3lIPCp1su</span><br><span class="line">  secret: my super secret phrase</span><br></pre></td></tr></table></figure>
 
+<h4 id="5-4-Hexo-Admin-插件的使用"><a href="#5-4-Hexo-Admin-插件的使用" class="headerlink" title="5.4 Hexo-Admin 插件的使用"></a>5.4 Hexo-Admin 插件的使用</h4><h5 id="5-4-1-汉化"><a href="#5-4-1-汉化" class="headerlink" title="5.4.1 汉化"></a>5.4.1 汉化</h5><p>找一个汉化bundle.js，替换掉：blog&#x2F;node_modules&#x2F;hexo-admin&#x2F;www&#x2F;bundle.js</p>
+<h5 id="5-4-2-使用说明"><a href="#5-4-2-使用说明" class="headerlink" title="5.4.2 使用说明"></a>5.4.2 使用说明</h5><ul>
+<li>文章：点击文章，可查看到文章列表</li>
+<li>新建文章：点击 +新增文章，可以新建md文章，输入文件名称，默认为：Untitled.md</li>
+<li>分页：点击分页，可查看分页列表。</li>
+<li>分页编辑：点击 +新建分页。</li>
+<li>部署：点击部署既可以提交最新的内容到github、gitee上。</li>
+</ul>
+<h3 id="6-配置gitee或github的ssh以方便本地电脑访问"><a href="#6-配置gitee或github的ssh以方便本地电脑访问" class="headerlink" title="6. 配置gitee或github的ssh以方便本地电脑访问"></a>6. 配置gitee或github的ssh以方便本地电脑访问</h3><p>使用SSH公钥可以让你在你的电脑和 gitee或github 通讯的时候使用安全连接 （Git的Remote要使用SSH地址）。</p>
+<p>配置主要分三个步骤：</p>
+<ol>
+<li>使用秘钥生成工具生成rsa秘钥和公钥</li>
+<li>将rsa公钥添加到代码托管平台</li>
+<li>将rsa秘钥添加到ssh-agent中，为ssh client指定使用的秘钥文件</li>
+</ol>
+<h4 id="6-1-在个人电脑上生成SSH密钥"><a href="#6-1-在个人电脑上生成SSH密钥" class="headerlink" title="6.1 在个人电脑上生成SSH密钥"></a>6.1 在个人电脑上生成SSH密钥</h4><p><strong>1.检查本地主机是否已经存在ssh key:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
 
-<h3 id="6-创建Gitee仓库"><a href="#6-创建Gitee仓库" class="headerlink" title="6. 创建Gitee仓库"></a>6. 创建Gitee仓库</h3><p>登录到你之前注册的Gitee主页,右上方上有个+图标。点击新建仓库进入到创建仓库页面。</p>
-<p>注意：</p>
+<p>看是否存在 id_rsa 和 id_rsa.pub文件，如果存在，说明已经有SSH Key。如下则说明存在。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id_rsa  id_rsa.pub  known_hosts</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.如果不存在，则生成ssh-key</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;xxx@xxx.com&quot;</span><br></pre></td></tr></table></figure>
+
+<p>执行后一直按回车键即可，不用输入密码，设置了密码那每次提交到远程都需要输入密码，麻烦。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C linux_york@163.com</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/c/Users/linux/.ssh/id_rsa):</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in /c/Users/linux/.ssh/id_rsa</span><br><span class="line">Your public key has been saved in /c/Users/linux/.ssh/id_rsa.pub</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:Y5AsJkoyNnlIo4MXOTxvrej7Tv8yqTw4DUo3CrQYtPI linux_york@163.com</span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+---[RSA 3072]----+</span><br><span class="line">| +..             |</span><br><span class="line">|+.O. . .         |</span><br><span class="line">|B*+=o.+          |</span><br><span class="line">|*Booo...         |</span><br><span class="line">|=o.o .  S        |</span><br><span class="line">|ooEo.  . .       |</span><br><span class="line">|ooo+o  .         |</span><br><span class="line">|..+oo.+          |</span><br><span class="line">|  .==o.+.        |</span><br><span class="line">+----[SHA256]-----+</span><br><span class="line"></span><br><span class="line">linux@little-PC MINGW64 ~/.ssh</span><br><span class="line">//查看一下生产的文件。显示如下则说明已生成好了ssh key</span><br><span class="line">$ ls</span><br><span class="line">id_rsa  id_rsa.pub  known_hosts</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.获取ssh key公钥内容（id_rsa.pub）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">cat id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>拷贝id_rsa.pub的内容到剪贴板，等待添加到代码托管平台。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">linux@little-PC MINGW64 ~/.ssh</span><br><span class="line">$ cat id_rsa.pub</span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDijblE2o0M5M2v35nkO1SasWI08</span><br><span class="line">cuFhiIqaY+tJ42eDxoloVC2jGnJeqtl6dW4uX15lowniXNP0eU0xm4hyI+8ghKOTw</span><br><span class="line">TVkzT2We3Edj/mDivRsScTCxyrZfZdjxo4TEuK6oMY8nAHoIvSgKg4yLehSoETIYS</span><br><span class="line">TLh8xNYeNc6DvUuLv59WgB8GMsxbKSHvsU9JxrbIIAu19mykxpmL24nWDPb/TB+mB</span><br><span class="line">/e5ehoJL9B/f0E8XQ9EmkdIShuj1xDA6F2m1ZmDABVCVZzzELBz4rWZhagjzujaWu</span><br><span class="line">j5gNGqkFFm8pEBXDMGc1tvaMSoJcvqPdVx1uWSCCS/IA3rEglFx4vDiLdWj6+GuvD</span><br><span class="line">PiFgT8tXkotAeSgKqWjX4ZZOerPcp9eapKzEqmzKXbtvYUF4B2VPUuZXkiZp40JOC</span><br><span class="line">f0NBD9mXnJyfBb0VpIAsXtUlAZLXQ5rJmZ9qLBopmQ5M38QmYWz0shQydYaKUokBK</span><br><span class="line">8IEkqSSyi+BcMH3lcZf5kfTOZts7hf0= linux_york@163.com</span><br><span class="line"></span><br><span class="line">linux@little-PC MINGW64 ~/.ssh</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="6-2-配置网站的SSH密钥"><a href="#6-2-配置网站的SSH密钥" class="headerlink" title="6.2 配置网站的SSH密钥"></a>6.2 配置网站的SSH密钥</h4><p>以 gitee为例。 主要步骤：</p>
+<ul>
+<li>登录gitee，点击个人头像的下拉菜单，选择设置</li>
+<li>在设置项找到SSH公钥</li>
+<li>添加公钥，添加标题（最好区分一下电脑）、拷贝在粘贴板的ssh key内容。</li>
+</ul>
+<p>验证是否设置成功:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">linux@little-PC MINGW64 ~</span><br><span class="line">$ ssh -T git@gitee.com</span><br><span class="line">Hi yueshichang! You&#x27;ve successfully authenticated, but GITEE.COM does</span><br><span class="line">not provide shell access.</span><br><span class="line"></span><br><span class="line">linux@little-PC MINGW64 ~</span><br></pre></td></tr></table></figure>
+
+<p>设置成功后，即可不需要账号密码pull和push代码.</p>
+<h3 id="7-创建Github-x2F-gitee仓库"><a href="#7-创建Github-x2F-gitee仓库" class="headerlink" title="7. 创建Github&#x2F;gitee仓库"></a>7. 创建Github&#x2F;gitee仓库</h3><ol>
+<li>登录到Github&#x2F;gitee主页，新建仓库进入到创建仓库页面。</li>
+</ol>
+<p>Repository name:  york.github.io 注意：</p>
 <blockquote>
-<p>如果你想直接通过域名就能访问你的博客（个人网站）的话，创建仓库的时候你的仓库名就需要和你注册Gitee的时候的用户名一样。</p>
-<p>例如：我的Gitee用户名为maoyikun，我创建的仓库名是maoyikun，那我访问的时候直接使用maoyikun.gitee.io就可以直接访问了。但是，如果我创建的仓库名和用户名不一样，比如我创建仓库的时候，仓库名为blog，那我访问的时候，就必须要域名+仓库名才能访问，如maoyikun.gitee.io。</p>
+<p>如果你想直接通过域名就能访问你的博客（个人网站）的话，创建仓库的时候你的仓库名就需要和你注册github&#x2F;gitee的时候的用户名一样。</p>
+<p>例如：用户名为york，创建的仓库名是york，那我访问的时候直接使用york.gitee.io就可以直接访问了。<br>但是，如果我创建的仓库名和用户名不一样，比如我创建仓库的时候，仓库名为blog，那我访问的时候，就必须要域名+仓库名才能访问。</p>
 </blockquote>
+<ol start="2">
+<li><p>选择public。因为接下来需要部署静态网站，private访问不了的。</p>
+</li>
+<li><p>点击配置Pages GitHub&#x2F;Gitee Pages</p>
+</li>
+</ol>
+<p>选择Branch 也就可以供访问了。</p>
+<h3 id="8-配置Hexo工程的部署地址。"><a href="#8-配置Hexo工程的部署地址。" class="headerlink" title="8.配置Hexo工程的部署地址。"></a>8.配置Hexo工程的部署地址。</h3><p>在blog工程根文件夹下，找到_config.yml文件。在最后配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">    type: git</span><br><span class="line">    repository: https://gitee.com/york/york.gitee.io.git</span><br><span class="line">    branch: master</span><br></pre></td></tr></table></figure>
+
+<p>此时需要安装一个上传工具 输入命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git</span><br></pre></td></tr></table></figure>
+
+<p>接下来就可以做一系列创作操作了，开启hexo、用hexo-admin编辑文章、部署文章到github、gitee…… 这里对常用的 hexo 指令做一下说明：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo g #生成静态网页 (执行 $ hexo g后会在站点根目录下生成public文件夹, hexo会将&quot;/blog/source/&quot; 下面的.md后缀的文件编译为.html后缀的文件,存放在&quot;/blog/public/ &quot; 路径下)</span><br><span class="line">hexo d #将本地数据部署到远端服务器(如：github、gitee)</span><br><span class="line">hexo s #启动本地hexo服务器。</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-并部署项目"><a href="#9-并部署项目" class="headerlink" title="9.并部署项目"></a>9.并部署项目</h3><ol>
+<li>生成静态网页</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p>执行 hexo g 后会在站点根目录下生成public文件夹， hexo会将”&#x2F;blog&#x2F;source&#x2F;“ 下面的.md后缀的文件编译为.html后缀的文件， 存放在”&#x2F;blog&#x2F;public&#x2F; “<br>路径下</p>
+<ol start="2">
+<li>启动本地hexo，查看效果。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>若没啥问题，就上传部署到github、gitee。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>输入网址：york.gitee.io 。即可在查看到自己的网站了。</li>
+</ol>
 
         </div>
 
