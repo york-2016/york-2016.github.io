@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="York">
+
+
+
+
+
+<title>MySql账号及权限设置和常用指令操作 | York&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Do It</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Do It</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">MySql账号及权限设置和常用指令操作</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">York</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021 /05 /04&nbsp;&nbsp;14:33:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Linux/">Linux</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <blockquote>
+<p>本文介绍如何在MySql中添加用户,新建数据库,用户授权,删除用户,修改密码<br>(注意每行后边都跟个 “;”。表示一个命令语句结束)</p>
+</blockquote>
+<h2 id="1-启动MySQL服务"><a href="#1-启动MySQL服务" class="headerlink" title="1.启动MySQL服务"></a>1.启动MySQL服务</h2><p>以管理员权限运行cmd终端。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//启动服务</span><br><span class="line">net start mysql </span><br><span class="line">//停止服务</span><br><span class="line">net stop mysql </span><br></pre></td></tr></table></figure>
+
+<h2 id="2-新建用户"><a href="#2-新建用户" class="headerlink" title="2.新建用户"></a>2.新建用户</h2><h3 id="2-1-登录MySQL："><a href="#2-1-登录MySQL：" class="headerlink" title="2.1 登录MySQL："></a>2.1 登录MySQL：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\WINDOWS\system32&gt;mysql -u york -p</span><br><span class="line">Enter password:</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-创建用户："><a href="#2-2-创建用户：" class="headerlink" title="2.2 创建用户："></a>2.2 创建用户：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; insert into mysql.user(Host,User,Password) values(&quot;localhost&quot;,&quot;york&quot;,password(&quot;1234&quot;));</span><br></pre></td></tr></table></figure>
+
+<p>这样就创建了一个名为：york 密码为：1234 的用户。</p>
+<p><em><strong>注意：此处的”localhost”，是指该用户只能在本地登录，不能在另外一台机器上远程登录。 如果想远程登录的话，将”localhost”改为”%”，表示在任何一台电脑上都可以登录。<br>也可以指定某台机器可以远程登录。</strong></em></p>
+<h3 id="2-3-登录测试："><a href="#2-3-登录测试：" class="headerlink" title="2.3 登录测试："></a>2.3 登录测试：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;exit;</span><br><span class="line">@&gt;mysql -u york -p</span><br><span class="line">@&gt;输入密码</span><br><span class="line">mysql&gt;登录成功</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-为用户授权"><a href="#3-为用户授权" class="headerlink" title="3.为用户授权"></a>3.为用户授权</h2><p>授权格式：grant 权限 on 数据库.* to 用户名@登录主机 identified by “密码”;</p>
+<h3 id="3-1-登录MYSQL（有ROOT权限），这里以ROOT身份登录"><a href="#3-1-登录MYSQL（有ROOT权限），这里以ROOT身份登录" class="headerlink" title="3.1 登录MYSQL（有ROOT权限），这里以ROOT身份登录"></a>3.1 登录MYSQL（有ROOT权限），这里以ROOT身份登录</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@&gt;mysql -u root -p</span><br><span class="line">@&gt;密码</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-授权york用户拥有所有数据库的某些权限："><a href="#3-2-授权york用户拥有所有数据库的某些权限：" class="headerlink" title="3.2 授权york用户拥有所有数据库的某些权限："></a>3.2 授权york用户拥有所有数据库的某些权限：</h3><p>格式：grant 权限 on 数据库.* to 用户名@登录主机 identified by “密码”;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//york用户对所有数据库都有select,delete,update,create,drop 权限。</span><br><span class="line">mysql&gt;grant select,delete,update,create,drop on *.* to york@&quot;%&quot; identified by &quot;1234&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>&#x2F;&#x2F;@”%” 表示对所有非本地主机授权，不包括localhost。 对localhost授权：加上一句:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on testDB.* to york@localhost identified by &#x27;1234&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>即可。</p>
+<h3 id="3-3-让授权生效"><a href="#3-3-让授权生效" class="headerlink" title="3.3 让授权生效"></a>3.3 让授权生效</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;flush privileges; //刷新系统权限表</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-修改指定用户密码"><a href="#4-修改指定用户密码" class="headerlink" title="4. 修改指定用户密码"></a>4. 修改指定用户密码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@&gt;mysql -u root -p</span><br><span class="line">@&gt;密码</span><br><span class="line">mysql&gt;update mysql.user set password=password(&#x27;123456&#x27;) where User=&quot;york&quot; and Host=&quot;localhost&quot;;</span><br><span class="line">mysql&gt;flush privileges;//刷新系统权限表</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-列出所有数据库"><a href="#5-列出所有数据库" class="headerlink" title="5. 列出所有数据库"></a>5. 列出所有数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;show database;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-切换数据库"><a href="#6-切换数据库" class="headerlink" title="6. 切换数据库"></a>6. 切换数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;use &#x27;数据库名&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-列出所有表"><a href="#7-列出所有表" class="headerlink" title="7. 列出所有表"></a>7. 列出所有表</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;show tables;</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-显示数据表结构"><a href="#8-显示数据表结构" class="headerlink" title="8. 显示数据表结构"></a>8. 显示数据表结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;describe 表名;</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-删除数据库和数据表"><a href="#9-删除数据库和数据表" class="headerlink" title="9. 删除数据库和数据表"></a>9. 删除数据库和数据表</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;drop database 数据库名;</span><br><span class="line">mysql&gt;drop table 数据表名;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/MySQL/"># MySQL</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/02/26/%E4%BA%BA%EF%BC%8C%E4%B8%80%E5%88%87%E7%A4%BE%E4%BC%9A%E5%85%B3%E7%B3%BB%E4%B9%8B%E6%80%BB%E5%92%8C/">人，一切社会关系之总和</a>
+            
+            
+            <a class="next" rel="next" href="/2021/05/03/%E5%9C%A8%E5%AE%89%E5%8D%93App%E4%B8%AD%E5%8A%A0%E5%85%A5logcat%E8%B0%83%E8%AF%95/">在安卓App中加入logcat调试</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Copyright © 2019 - 2023 Designed by York</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

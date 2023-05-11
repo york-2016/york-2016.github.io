@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="York">
+
+
+
+
+
+<title>在安卓App中加入logcat调试 | York&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Do It</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Do It</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">在安卓App中加入logcat调试</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">York</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2021 /05 /03&nbsp;&nbsp;12:03:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Android/">Android</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="安卓-App-内-logcat-日志查看"><a href="#安卓-App-内-logcat-日志查看" class="headerlink" title="安卓 App 内 logcat 日志查看"></a>安卓 App 内 logcat 日志查看</h2><blockquote>
+<p>为方便安卓APP在开发、测试阶段的调试，需要在手机端实时查看到logcat打印情况，因此可在APP中加入一个全局悬浮窗效果的日志查看功能，作为测试阶段的调试工具。</p>
+</blockquote>
+<h2 id="1-logcat-介绍"><a href="#1-logcat-介绍" class="headerlink" title="1. logcat 介绍"></a>1. logcat 介绍</h2><h3 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1 简介"></a>1.1 简介</h3><p>Android日志系统提供了记录和查看系统调试信息的功能，日志从各种软件和系统的缓冲区中记录下来的，缓冲区可通过logcat命令查看使用。</p>
+<h3 id="1-2-开发者选项"><a href="#1-2-开发者选项" class="headerlink" title="1.2 开发者选项"></a>1.2 开发者选项</h3><p>要使用logcat需先打开开发者选项，有一个选项叫“日志记录器缓冲区大小”，默认是256K，日志循环写入环形缓冲区，在通常情况下，写满时最旧的日志会被删除以给新输出的日志留出内存空间。</p>
+<h3 id="1-3-logcat缓冲区"><a href="#1-3-logcat缓冲区" class="headerlink" title="1.3 logcat缓冲区"></a>1.3 logcat缓冲区</h3><p>Android log 输出量巨大，特别是通信系统的log，因此，Android把log输出到不同的缓冲区中，目前定义的有四个log缓冲区：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Radio ： 输出通信系统的log，如：WiFi，蓝牙，3/4/5G，GPS,NFC等</span><br><span class="line">System： 输出系统组件的log，权限比较高，如：调用相机，调用录制，调用麦克风等</span><br><span class="line">Events： 输出event模块的log，event翻译过来就是事件，如：通过手指点击屏幕的某一处地方，称为点击事件；通过按电源或者音量加减等</span><br><span class="line">Main：   所有java层的log，（不属于上面3层的log）</span><br></pre></td></tr></table></figure>
+
+<p>如果测试APP需要输出Main的日志，命令：adb logcat -b radio，adb logcat 默认抓取Main。</p>
+<h3 id="1-4-日志组成部分"><a href="#1-4-日志组成部分" class="headerlink" title="1.4 日志组成部分"></a>1.4 日志组成部分</h3><ol>
+<li><p>写下日志的时间，如上中 “05-22 12:27:15.370”</p>
+</li>
+<li><p>优先级，在Android 中，日志的优先级从低到高分成以下几种：</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">V ---Verbose（啰嗦，最低级别，开发调试中的一些详细信息，仅在开发中使用，不可在发布产品上打开）</span><br><span class="line">D ---Debug（调试，用于调试的信息，可以在发布产品中关闭，比较常见）</span><br><span class="line">I ---Info（信息，一般提示性的消息）</span><br><span class="line">W ---Warning（警告）</span><br><span class="line">E ---Error（错误，已经出现可影响运行的错误，比如应用crash时输出的日志）</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>标签（tag），标明日志发起者和方便日志的过滤筛选，如上中“libTGL”</p>
+</li>
+<li><p>PID（进程ID），如上中 “1438”</p>
+</li>
+<li><p>正文，本日志的主体内容</p>
+</li>
+</ol>
+<h2 id="2-logcat-命令"><a href="#2-logcat-命令" class="headerlink" title="2. logcat 命令"></a>2. logcat 命令</h2><p>logcat有许多命令可供使用，在终端输入不同命令可对logcat实现不同操作。</p>
+<h3 id="2-1-实时输出指定标签内容"><a href="#2-1-实时输出指定标签内容" class="headerlink" title="2.1 实时输出指定标签内容"></a>2.1 实时输出指定标签内容</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logcat -s TAG</span><br><span class="line">仅输出标签为TAG的日志我们想输出 &quot;CameraHal&quot; 标签的信息, 就可以使用logcat -s CameraHal;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-输出日志信息到文件"><a href="#2-2-输出日志信息到文件" class="headerlink" title="2.2 输出日志信息到文件"></a>2.2 输出日志信息到文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">logcat -f /data/log.txt</span><br><span class="line">日志保存到log.txt中</span><br><span class="line"></span><br><span class="line">logcat -r 1 -n 4 -f /data/log.txt</span><br><span class="line">将日志文件保存到log.txt中，当日志文件大于1K字节时，日志保存在log.txt1中，直到下标到达n-1时，重新覆盖log.txt中的信息,循环覆盖</span><br><span class="line">-r 每&lt;kbytes&gt; 时 输出日志，默认值为16，需要和-f 选 项一起使用</span><br><span class="line">-n 设置日志的最大数目&lt;count&gt; .， 默认值是4，需要和 -r 选 项一起使用</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-过滤固定字符串"><a href="#2-3-过滤固定字符串" class="headerlink" title="2.3 过滤固定字符串"></a>2.3 过滤固定字符串</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">logcat | grep -i &lt;str&gt; </span><br><span class="line">显示包含，并忽略大小写的logcat</span><br><span class="line"></span><br><span class="line">logcat | grep &lt;str&gt; </span><br><span class="line">显示包含的logcat</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-清空日志缓存信息"><a href="#2-4-清空日志缓存信息" class="headerlink" title="2.4 清空日志缓存信息"></a>2.4 清空日志缓存信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logcat -c</span><br><span class="line">将之前的日志信息清空, 重新开始输出日志信息</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-过滤格式输出"><a href="#2-5-过滤格式输出" class="headerlink" title="2.5 过滤格式输出"></a>2.5 过滤格式输出</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">标签:日志等级</span><br><span class="line">V : Verbose (明细)</span><br><span class="line">D : Debug (调试)</span><br><span class="line">I : Info (信息)</span><br><span class="line">W : Warn (警告)</span><br><span class="line">E : Error (错误)</span><br><span class="line">F : Fatal (严重错误)</span><br><span class="line">S : Silent(Super all output) (最高的优先级, 可能不会记载东西)</span><br><span class="line"></span><br><span class="line">logcat *:E</span><br><span class="line">显示 Error 以上级别的日志</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-6-将缓存日志输出"><a href="#2-6-将缓存日志输出" class="headerlink" title="2.6 将缓存日志输出"></a>2.6 将缓存日志输出</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logcat -d</span><br><span class="line">输出命令, 之后推出命令, 不会进行阻塞</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-7-指定-logcat-的日志输出格式"><a href="#2-7-指定-logcat-的日志输出格式" class="headerlink" title="2.7 指定 logcat 的日志输出格式"></a>2.7 指定 logcat 的日志输出格式</h3><p>日志消息包含一个元数据字段，除了标签和优先级，还可以修改输出显示一个特定的元数据字段格式的消息。为此，使用logcat -v 选项来指定一个支持的输出格式。支持的格式有：</p>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>brief</td>
+<td>显示优先级&#x2F;标记和过程的PID发出的消息（默认格式）</td>
+</tr>
+<tr>
+<td>process</td>
+<td>只显示PID</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>只显示优先级&#x2F;标记</td>
+</tr>
+<tr>
+<td>raw</td>
+<td>显示原始的日志消息，没有其他元数据字段</td>
+</tr>
+<tr>
+<td>time</td>
+<td>调用显示日期、时间、优先级&#x2F;标签和过程的PID发出消息</td>
+</tr>
+<tr>
+<td>threadtime</td>
+<td>调用显示日期、时间、优先级、标签遗迹PID TID线程发出的消息</td>
+</tr>
+<tr>
+<td>long</td>
+<td>显示所有元数据字段与空白行和单独的消息</td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adb logcat –v thread</span><br><span class="line"></span><br><span class="line">只能指定一个输出格式-v</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-应用内日志打印"><a href="#3-应用内日志打印" class="headerlink" title="3.应用内日志打印"></a>3.应用内日志打印</h2><h3 id="3-1-获取日志"><a href="#3-1-获取日志" class="headerlink" title="3.1 获取日志"></a>3.1 获取日志</h3><p>设置打印格式：logcat -v tag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 打印log，子线程</span><br><span class="line"> */</span><br><span class="line">private suspend fun printLogCat() &#123;</span><br><span class="line">    printLog = true</span><br><span class="line">    withContext(Dispatchers.IO) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            //1.获取日志数据</span><br><span class="line">            val cmdLog = &quot;logcat -v tag&quot;</span><br><span class="line">            val process = Runtime.getRuntime().exec(cmdLog)</span><br><span class="line">            val bufferedReader = BufferedReader(InputStreamReader(process.inputStream))</span><br><span class="line">            var line: String?</span><br><span class="line">            while (printLog) &#123;</span><br><span class="line">                if (bufferedReader.readLine().also &#123; line = it &#125; != null) &#123;</span><br><span class="line">                    line?.let &#123;</span><br><span class="line">                        if (it.contains(logcatGrep)) &#123;</span><br><span class="line">                            withContext(Dispatchers.Main) &#123;</span><br><span class="line">                                //2.处理日志数据</span><br><span class="line">                                buildLogLine(it)</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (e: IOException) &#123;</span><br><span class="line">            e.printStackTrace()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-处理日志数据"><a href="#3-2-处理日志数据" class="headerlink" title="3.2 处理日志数据"></a>3.2 处理日志数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">  * 处理日志数据给log分等级添加颜色、时间戳</span><br><span class="line">  * 存到list中，在recycleview中显示</span><br><span class="line">  */</span><br><span class="line"> private fun buildLogLine(line: String?) &#123;</span><br><span class="line">     line?.let &#123;</span><br><span class="line">         var color = getColor(com.york.common.R.color.green)</span><br><span class="line">         if (it.startsWith(&quot;D&quot;)) &#123;</span><br><span class="line">             color = getColor(com.york.common.R.color.blue_light)</span><br><span class="line">         &#125; else if (it.startsWith(&quot;W&quot;)) &#123;</span><br><span class="line">             //如果是上一条警告，本条忽略。只打印第一条</span><br><span class="line">             if (logList.size &gt; 1 &amp;&amp; logList[logList.lastIndex].content.startsWith(&quot;W&quot;)) &#123;</span><br><span class="line">                 return</span><br><span class="line">             &#125;</span><br><span class="line">             color = getColor(com.york.common.R.color.yellow)</span><br><span class="line">         &#125; else if (it.startsWith(&quot;E&quot;)) &#123;</span><br><span class="line">             color = getColor(com.york.common.R.color.red_notification)</span><br><span class="line">         &#125;</span><br><span class="line">         val logLine = LogLine(System.currentTimeMillis(), line, color)</span><br><span class="line">         //限制一下，100行</span><br><span class="line">         if (logList.size &gt; 100) &#123;</span><br><span class="line">             logList.removeAt(0)</span><br><span class="line">         &#125;</span><br><span class="line">         logList.add(logLine)</span><br><span class="line">         logcatAdapter.setList(logList)</span><br><span class="line">         //自动滚动到底部</span><br><span class="line">         if (scrollToBottom) &#123;</span><br><span class="line">             floatingLogcatBinding?.rcvLogcat?.scrollToPosition(logList.size - 1)</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"># 开发工具</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/05/04/MySql%E8%B4%A6%E5%8F%B7%E5%8F%8A%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE%E5%92%8C%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E6%93%8D%E4%BD%9C/">MySql账号及权限设置和常用指令操作</a>
+            
+            
+            <a class="next" rel="next" href="/2020/06/02/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Java 基础知识</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Copyright © 2019 - 2023 Designed by York</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
